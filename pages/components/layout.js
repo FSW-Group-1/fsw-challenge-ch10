@@ -16,7 +16,10 @@ export function Layout(props) {
             </Head>
 
             <Navbar />
-            {props.children}
+
+            <main className={styles.main}>
+                {props.children}  
+            </main>
 
             <footer className={styles.footer}>
                 <a
