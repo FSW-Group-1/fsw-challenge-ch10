@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
+import Navbar from './navbar'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from '../../styles/Home.module.css'
 
 export function Layout(props) {
@@ -12,6 +15,7 @@ export function Layout(props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
+            <Navbar />
             {props.children}
 
             <footer className={styles.footer}>
