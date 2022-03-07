@@ -11,7 +11,7 @@ import { Layout } from './components/layout'
 export default function Home() {
   return (
     <Layout title="Home">
-      <div className='pt-5 pb-5'>
+      <div className='bg-black pt-5 pb-5'>
         <Container className={styles.header} fluid>
             <Container className='pt-5 pt-md-2 pt-lg-5'>
               <Row className="justify-content-center mt-xxl-3">
@@ -33,6 +33,18 @@ export default function Home() {
                   </Col>
               </Row>
             </Container>
+        </Container>
+        <br />
+        <Container id='game-list' className={styles.gameList}  fluid>
+          <div className='pt-5 pt-sm-1'>
+            <Container>
+                <Row className='justify-content-center'>
+                    <Col className='text-center'>
+                        <h1>GAMES</h1>
+                    </Col>
+                </Row>
+            </Container>
+          </div>
         </Container>
       </div>
     </Layout>

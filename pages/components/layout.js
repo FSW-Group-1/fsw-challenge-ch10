@@ -16,10 +16,7 @@ export function Layout(props) {
             </Head>
 
             <Navbar />
-
-            {/* <main className={styles.main}>
-                {props.children}  
-            </main> */}
+            
             <div>
                 {props.children}
             </div>
