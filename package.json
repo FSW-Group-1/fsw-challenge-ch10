@@ -9,13 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "reactstrap": "^9.0.1"
+    "react-redux": "^7.2.6",
+    "reactstrap": "^9.0.1",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "8.10.0",
-    "eslint-config-next": "12.1.0"
+    "eslint-config-next": "12.1.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }
