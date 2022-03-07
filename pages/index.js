@@ -11,9 +11,9 @@ import { Layout } from './components/layout'
 export default function Home() {
   return (
     <Layout title="Home">
-      <div className='body bg-black'>
+      <div className='pt-5 pb-5'>
         <Container className={styles.header} fluid>
-            <Container className='Container pt-5 pt-md-2 pt-lg-5'>
+            <Container className='pt-5 pt-md-2 pt-lg-5'>
               <Row className="justify-content-center mt-xxl-3">
                   <Col xs={12} sm={12} md={8} className="text-center">
                       <h1>PLAY TRADISIONAL GAME</h1>
