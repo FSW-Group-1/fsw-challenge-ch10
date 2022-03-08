@@ -157,4 +157,4 @@ class register extends Component{
 }
 
 
-export default RegisterPage; 
+export default register; 
