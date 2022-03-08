@@ -13,7 +13,6 @@ export default function(state = initialState, action){
             }
 
             case GET_REQUEST:
-                console.log(GET_REQUEST)
                 return{
                     ...state,
                     user: action.payload

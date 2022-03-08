@@ -29,9 +29,14 @@ class Test extends React.Component{
         }
         await this.props.loginUser(loginData)
         console.log(this.props.user.user)
+        console.log(localStorage.getItem('accessToken'))
         // console.log(this.props.user.user.accessToken)
-        
+    }
 
+    signOut = async (event) => {
+        event.preventDefault();
+        localStorage.removeItem('accessToken')
+        console.log(localStorage.getItem('accessToken'))
     }
     render(){
         return(
@@ -54,7 +59,9 @@ class Test extends React.Component{
                     <input type='submit' />
                 </form>
                 { this.props.user.isLoading == true ? <p style={{ textAlign: 'center' }}>Loading....</p> : null }
-
+            <br />
+            <button onClick={this.signOut}> Sign Out!</button>
+            {localStorage.getItem('accessToken')}
             </div>
         )
     }

@@ -16,7 +16,7 @@ const loginUser = (dataUser) => async dispatch => {
         const{ data } = await axios.post(`${apiURL}/login`, dataUser, configJSON)
         console.log(data.data)
         //set localStorage here
-        // localStorage.setItem('accessToken')
+        localStorage.setItem('accessToken', data.data.accessToken)
         dispatch({
             type: GET_REQUEST,
             payload: data.data
@@ -27,9 +27,9 @@ const loginUser = (dataUser) => async dispatch => {
               type: REQUEST_FINISHED
           }) 
         }, 1000)
-        console.log('finished')
+        // console.log('finished')
     } catch (error) {
-        
+        console.log(error.response.data.result)
     }
 }
 
