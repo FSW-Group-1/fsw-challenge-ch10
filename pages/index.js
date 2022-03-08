@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { Component, useEffect, useState } from 'react'
 // import styles from '../styles/Home.module.css'
 // import styles from '../styles/Index.module.css'
 import styles from "../styles/Index.module.css"
@@ -7,8 +8,54 @@ import styles from "../styles/Index.module.css"
 import { Container, Row, Col } from 'react-bootstrap'
 
 import { Layout } from './components/layout'
+import { LoadingAnimation } from './components/loadingAnimation_1'
+
+class GameCard extends Component {
+  render () {
+    return (
+      <>
+        <h1>ladida</h1>
+      </>
+    )
+  }
+}
 
 export default function Home() {
+  const [testState, setTestState] = useState()
+  const [gameList, setGameList] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    getGameList()
+  })
+
+  const getGameList = () => {
+    try {
+      const list = [
+        {
+          description: "Permainan Batu Gunting Kertas",
+          imageFileName: "batu-gunting-kertas.jpg",
+          name: "Rock Paper Scissor",
+          route: "rps"
+        }
+      ]
+      setGameList(list)
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
+  }
+
+  const loadingGameList = () => {
+    return(
+      <>
+        {/* <h2>Loading ...</h2> */}
+        <LoadingAnimation />
+      </>
+    )
+  }
+
   return (
     <Layout title="Home">
       <div className='bg-black pt-5 pb-5'>
@@ -44,7 +91,29 @@ export default function Home() {
                     </Col>
                 </Row>
             </Container>
+            <br />
+            <br />
+            <br />
+            <Container>
+              {/* <Row className='justify-content-center mt-3'>
+                  {gameList.map((item, index) => {
+                      const triggerr = this.setTrigger
+                      return(
+                          <Col className='col-md-3 col-6 mb-5' key={index}>
+                              <GameCard item={item} setTrigger={gameDetailTrigger}/>
+                          </Col>
+                      )
+                  })}
+              </Row> */}
+              {loadingGameList()}
+            </Container>
           </div>
+          <Container>
+            <Row className='justify-content-center mt-3'>
+              
+            </Row>
+          </Container>
+
         </Container>
       </div>
     </Layout>
