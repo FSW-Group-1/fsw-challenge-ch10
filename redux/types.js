@@ -1,0 +1,3 @@
+//General Types
+export const REQUEST_LOADING = 'REQUEST_LOADING'
+export const REQUEST_FINISHED = 'REQUEST_FINISHED'
