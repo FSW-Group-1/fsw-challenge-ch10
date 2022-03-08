@@ -82,9 +82,9 @@ export default function Home() {
             </Container>
         </Container>
         <br />
-        <Container id='game-list' className={styles.gameList}  fluid>
-          <div className='pt-5 pt-sm-1'>
-            <Container>
+        <Container id='game-list' className='pt-5 pt-sm-1' fluid>
+          <div className={styles.gameList}>
+            <Container className="mt-5">
                 <Row className='justify-content-center'>
                     <Col className='text-center'>
                         <h1>GAMES</h1>
