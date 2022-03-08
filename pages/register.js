@@ -9,7 +9,7 @@ import { AuthContext } from "../auth/Auth";
 import { Component} from './components/layout'
 
 
-class RegisterPage extends Component{
+class register extends Component{
   static contextType = AuthContext; 
   constructor(props){
       super(props);

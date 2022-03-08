@@ -7,7 +7,7 @@ import firebase from '../auth/firebase';
 import { AuthContext } from "../auth/Auth";
 import { Component} from './components/layout'
 
-class LoginPage extends Component{
+class login extends Component{
   static contextType = AuthContext; 
   constructor(props){
       super(props);
