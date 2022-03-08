@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { Redirect } from 'react-router-dom'
-
+import { connect } from "react-redux";
+import userAction from "../redux/action/userAction";
 import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
-import firebase from '../auth/firebase';
-import { AuthContext } from "../auth/Auth";
-import { Component} from './components/layout'
 
-class login extends Component{
-  static contextType = AuthContext; 
+import { Layout } from './components/layout'
+
+class Login extends Component{
+  
   constructor(props){
       super(props);
 
@@ -16,17 +15,22 @@ class login extends Component{
   }
 
   set = name => event => {
-      // console.log(event.target.value)  
       this.setState({[name]: event.target.value});
   }
 
   handleSubmit = async(event) => {
-      // const { email, password}  = this.state;
-      // const { history } = this.props
-      // event.preventDefault();
-
-      //  // Validasi
-      //  if(!email || !password) return alert('Please insert missing credentials!')
+      const { email, password}  = this.state;
+      event.preventDefault();
+      const loginData = {
+        email,
+        password
+    }
+    // Validasi
+      if(!email || !password) return alert('Please insert missing credentials!')
+      
+      await this.props.loginUser(loginData)
+      console.log(this.props.user.user)
+      console.log(localStorage.getItem('accessToken'))
 
       //  // Register via Firebase
       //  try {
@@ -39,11 +43,9 @@ class login extends Component{
   }
 
   render(){
-      const { currentUser } = this.context
-      if (!!currentUser) return <Redirect to="/" />
       return(
         <>
-        <Layout tittle="login">
+        <Layout title="Login">
         <Col xs={8} sm={12} md={12} className="text-center pt-sm-5 pt-xl-5">
             <h1>LOGIN</h1>                       
         </Col>
@@ -91,4 +93,7 @@ class login extends Component{
   }
 }
 
-export default login; 
+export default connect(
+  state => state,
+  userAction
+)(Login)

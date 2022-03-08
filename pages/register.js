@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
-// import Navbar from './partials/Navbar'
-import { Redirect } from 'react-router-dom'
 
-import firebase from '../auth/firebase';
-import { AuthContext } from "../auth/Auth";
-import { Component} from './components/layout'
+import { Layout } from './components/layout'
 
 
-class register extends Component{
-  static contextType = AuthContext; 
+class Register extends Component{
+  
   constructor(props){
       super(props);
 
@@ -55,12 +51,10 @@ class register extends Component{
     //  }
 }
     render(){
-      const { currentUser } = this.context
-      if (!!currentUser) return <Redirect to="/" />
 
       return (
     <>
-    <Layout tittle="register">
+    <Layout title="Register">
       <Col xs={8} sm={12} md={12} className="text-center pt-sm-5 pt-xl-5">
           <h1>SIGN UP</h1>                       
       </Col>
@@ -157,4 +151,4 @@ class register extends Component{
 }
 
 
-export default register; 
+export default Register; 

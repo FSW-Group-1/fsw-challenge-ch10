@@ -1,4 +1,3 @@
-import Head from "next/head";
 import React from "react";
 import { connect } from "react-redux";
 import userAction from "../redux/action/userAction";
@@ -61,7 +60,6 @@ class Test extends React.Component{
                 { this.props.user.isLoading == true ? <p style={{ textAlign: 'center' }}>Loading....</p> : null }
             <br />
             <button onClick={this.signOut}> Sign Out!</button>
-            {localStorage.getItem('accessToken')}
             </div>
         )
     }
