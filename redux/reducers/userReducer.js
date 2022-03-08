@@ -1,4 +1,4 @@
-import { REQUEST_FINISHED, REQUEST_LOADING } from "../types";
+import { REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST} from "../types";
 
 const initialState = [{
     user: []
@@ -10,8 +10,14 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 isLoading: false,
-                user: action.payload
             }
+
+            case GET_REQUEST:
+                console.log(GET_REQUEST)
+                return{
+                    ...state,
+                    user: action.payload
+                }
         
             case REQUEST_LOADING:
                 return{

@@ -16,39 +16,46 @@ class Test extends React.Component{
 
     }
 
+    useEffect(){
+        
+    }
+
     handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Handling Submit')
         const { email, password}  = this.state;
         const loginData = {
             email,
             password
         }
         await this.props.loginUser(loginData)
-        console.log(this.props.user)
-        console.log(this.props.user.user.accessToken)
+        console.log(this.props.user.user)
+        // console.log(this.props.user.user.accessToken)
         
 
     }
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
-                <input 
-                    type='email' 
-                    className="form-control" 
-                    placeholder="enter email"
-                    onChange={this.set('email')}
-                />
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <input 
+                        type='email' 
+                        className="form-control" 
+                        placeholder="enter email"
+                        onChange={this.set('email')}
+                    />
 
-                <input 
-                    type='password' 
-                    className="form-control" 
-                    placeholder="enter password"
-                    onChange={this.set('password')}
-                />
+                    <input 
+                        type='password' 
+                        className="form-control" 
+                        placeholder="enter password"
+                        onChange={this.set('password')}
+                    />
 
-                <input type='submit' />
-            </form>
+                    <input type='submit' />
+                </form>
+                { this.props.user.isLoading == true ? <p style={{ textAlign: 'center' }}>Loading....</p> : null }
+
+            </div>
         )
     }
 }

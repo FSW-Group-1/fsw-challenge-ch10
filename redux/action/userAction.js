@@ -1,5 +1,5 @@
 import axios from "axios";
-import { REQUEST_FINISHED, REQUEST_LOADING } from "../types";
+import { REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST } from "../types";
 
 const apiURL = 'https://fsw-challenge-ch10-api-dev.herokuapp.com/api'
 const configJSON = {
@@ -14,15 +14,20 @@ const loginUser = (dataUser) => async dispatch => {
         })
 
         const{ data } = await axios.post(`${apiURL}/login`, dataUser, configJSON)
-        console.log(data.data.accessToken)
+        console.log(data.data)
         //set localStorage here
         // localStorage.setItem('accessToken')
-        setTimeout(() =>{
-            dispatch({
-                type: REQUEST_FINISHED,
-                payload: data.data
-            })
+        dispatch({
+            type: GET_REQUEST,
+            payload: data.data
         })
+
+        setTimeout(() =>{
+          dispatch({
+              type: REQUEST_FINISHED
+          }) 
+        }, 1000)
+        console.log('finished')
     } catch (error) {
         
     }
