@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import styles_home from '../styles/Home.module.css'
 
 import App from 'next/app'
 import withReduxStore from '../utils/withReduxStore'
