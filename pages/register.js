@@ -36,7 +36,9 @@ class Register extends Component{
 
 }
     render(){
-
+      if(this.props.auth.loggedIn == true){
+        Router.push('/')
+      }
       return (
         <>
         <Layout title="Register">
