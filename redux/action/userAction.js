@@ -70,6 +70,7 @@ const logOut = () => async (dispatch) =>{
 }
 
 const checkTokenValid = () => async (dispatch) => {
+    console.log('checking Token')
     const config = {
         headers: {
             authorization: `${localStorage.getItem('accessToken')}`,

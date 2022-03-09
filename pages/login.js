@@ -35,6 +35,9 @@ class Login extends Component{
   }
 
   render(){
+    if(this.props.auth.loggedIn == true){
+      Router.push('/')
+    }
       return(
         <>
         <Layout title="Login">
