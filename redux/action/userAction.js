@@ -42,7 +42,7 @@ const loginUser = (dataUser) => async dispatch => {
         })
 
         const{ data } = await axios.post(`${apiURL}/login`, dataUser, configJSON)
-        console.log(data.data)
+        console.log(data.message)
         //set localStorage here
         localStorage.setItem('accessToken', data.data.accessToken)
         dispatch({
@@ -70,7 +70,7 @@ const logOut = () => async (dispatch) =>{
 }
 
 const checkTokenValid = () => async (dispatch) => {
-    console.log('checking Token')
+    // console.log('checking Token')
     const config = {
         headers: {
             authorization: `${localStorage.getItem('accessToken')}`,
@@ -78,9 +78,9 @@ const checkTokenValid = () => async (dispatch) => {
     }
     if(localStorage.getItem('accessToken') != null){
         const result = await axios.get(`${apiURL}/verifytoken`, config)
-        console.log(result.data)
+        // console.log(result.data)
         if(result.data.err == null){
-            console.log('Dispatching Log In')
+            // console.log('Dispatching Log In')
             dispatch({
                 type: LOG_IN,
             })
