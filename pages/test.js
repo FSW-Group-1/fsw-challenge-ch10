@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Layout } from './components/layout'
 import userAction from "../redux/action/userAction";
+import privateAuth from "../Auth/privateAuth";
 class Test extends React.Component{
     constructor(props){
         super(props)
@@ -39,28 +41,32 @@ class Test extends React.Component{
     }
     render(){
         return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input 
-                        type='email' 
-                        className="form-control" 
-                        placeholder="enter email"
-                        onChange={this.set('email')}
-                    />
+            <>
+            <Layout title='Test'>
+                <div className="container mt-5">
+                    <form onSubmit={this.handleSubmit}>
+                        <input 
+                            type='email' 
+                            className="form-control" 
+                            placeholder="enter email"
+                            onChange={this.set('email')}
+                        />
 
-                    <input 
-                        type='password' 
-                        className="form-control" 
-                        placeholder="enter password"
-                        onChange={this.set('password')}
-                    />
-
-                    <input type='submit' />
-                </form>
-                { this.props.user.isLoading == true ? <p style={{ textAlign: 'center' }}>Loading....</p> : null }
+                        <input 
+                            type='password' 
+                            className="form-control" 
+                            placeholder="enter password"
+                            onChange={this.set('password')}
+                        />
+                        <br/>
+                        <input type='submit' />
+                    </form>
+                { this.props.auth.isLoading == true ? <p style={{ textAlign: 'center' }}>Loading....</p> : null }
             <br />
             <button onClick={this.signOut}> Sign Out!</button>
             </div>
+            </Layout>
+            </>
         )
     }
 }
@@ -68,4 +74,4 @@ class Test extends React.Component{
 export default connect(
     state => state,
     userAction
-)(Test)
+)(privateAuth(Test))
