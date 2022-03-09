@@ -20,35 +20,20 @@ class Navbars extends Component{
     }
 
     componentDidMount(){
-        const user = localStorage.getItem('accessToken')
-        this.setState({
-            user: user
-        })
+        this.props.checkTokenValid()
     }
     useEffect(){
        
     }
 
     showLoggedIn = () =>{
-        // const user = null;
-
-            return(
-                <>
-                    <Nav.Link className='text-success fw-bold' href='/profile'>Hello</Nav.Link>
-                    <Nav.Link className='border-end me-1'></Nav.Link>
-                    <Nav.Link onClick={() => this.signOut()}>Sign Out</Nav.Link>
-                </>
-            )
-        
-        // else{
-        //     // console.log("User is not signed in!")
-        //     return(
-        //         <>
-        //             <Nav.Link href="/login">Login</Nav.Link>
-        //             <Nav.Link href="/register">Register</Nav.Link>
-        //         </>
-        //     )
-        // }
+        return(
+            <>
+                <Nav.Link className='border border-success text-success fw-bold' href='/profile'>Profile</Nav.Link>
+                <Nav.Link className='border-end me-1'></Nav.Link>
+                <Nav.Link className='border border-secondary ms-1' onClick={() => this.props.logOut()}>Sign Out</Nav.Link>
+            </>
+        )
     }
 
     showLoggedOut = () => {
@@ -78,11 +63,8 @@ class Navbars extends Component{
                             </NavDropdown>
                             </Nav>
                             <Nav>
-                                {this.state.user != null ? this.showLoggedIn() : this.showLoggedOut()}
-                                {/* <Nav.Link onClick={() => firebase.auth().signOut()}>Sign out</Nav.Link>
-    
-                                <Nav.Link href="/login">Login</Nav.Link>
-                                <Nav.Link href="/register">Register</Nav.Link> */}
+                                {this.props.user.loggedIn ? this.showLoggedIn() : this.showLoggedOut()}
+                                
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

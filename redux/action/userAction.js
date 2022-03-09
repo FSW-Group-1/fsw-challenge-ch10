@@ -1,16 +1,27 @@
 import axios from "axios";
-import { REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST } from "../types";
+import { 
+    REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST,
+    LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, 
+    LOG_OUT, LOG_IN
+     } from "../types";
 
+// const accessToken = localStorage.getItem('accessToken')
 const apiURL = 'https://fsw-challenge-ch10-api-dev.herokuapp.com/api'
 const configJSON = {
     headers: {
         'Content-Type': 'application/json'
     }
 }
+
+// const configAuth = {
+//     headers: {
+//         authorization: `${localStorage.getItem('accessToken')}`,
+//     },
+// }
 const loginUser = (dataUser) => async dispatch => {
     try {
         dispatch({
-            type: REQUEST_LOADING
+            type: LOGIN_REQUEST
         })
 
         const{ data } = await axios.post(`${apiURL}/login`, dataUser, configJSON)
@@ -18,15 +29,10 @@ const loginUser = (dataUser) => async dispatch => {
         //set localStorage here
         localStorage.setItem('accessToken', data.data.accessToken)
         dispatch({
-            type: GET_REQUEST,
+            type: LOGIN_FINISHED,
             payload: data.data
         })
 
-        setTimeout(() =>{
-          dispatch({
-              type: REQUEST_FINISHED
-          }) 
-        }, 1000)
         // console.log('finished')
     } catch (error) {
         console.log(error.response.data.result)
@@ -34,6 +40,40 @@ const loginUser = (dataUser) => async dispatch => {
 }
 
 
+const logOut = () => async (dispatch) =>{
+    console.log('Logged OUT')
+    localStorage.removeItem('accessToken')
+    dispatch({
+        type: LOG_OUT
+    })
+}
+
+const checkTokenValid = () => async (dispatch) => {
+    const config = {
+        headers: {
+            authorization: `${localStorage.getItem('accessToken')}`,
+        },
+    }
+    if(localStorage.getItem('accessToken') != null){
+        const result = await axios.get(`${apiURL}/verifytoken`, config)
+        console.log(result.data)
+        if(result.data.err == null){
+            console.log('Dispatching Log In')
+            dispatch({
+                type: LOG_IN,
+            })
+        }else{
+            logOut()
+        }
+    }else{
+        dispatch({
+            type: LOG_OUT
+        })
+    }
+}
+
 export default {
-    loginUser
+    loginUser,
+    logOut,
+    checkTokenValid,
 }

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import userAction from "../redux/action/userAction";
 import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 
+import Router from 'next/router';
 import { Layout } from './components/layout'
 
 class Login extends Component{
@@ -19,8 +20,8 @@ class Login extends Component{
   }
 
   handleSubmit = async(event) => {
+    event.preventDefault();
       const { email, password}  = this.state;
-      event.preventDefault();
       const loginData = {
         email,
         password
@@ -32,6 +33,7 @@ class Login extends Component{
       console.log(this.props.user.user)
       console.log(localStorage.getItem('accessToken'))
 
+      Router.push('/')
       //  // Register via Firebase
       //  try {
       //     await firebase.auth().signInWithEmailAndPassword(email, password)

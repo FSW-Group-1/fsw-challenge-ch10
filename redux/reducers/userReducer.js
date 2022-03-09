@@ -1,4 +1,7 @@
-import { REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST} from "../types";
+import { 
+    REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST,
+    LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, LOG_OUT, LOG_IN
+     } from "../types";
 
 const initialState = [{
     user: []
@@ -6,25 +9,38 @@ const initialState = [{
 
 export default function(state = initialState, action){
     switch(action.type){
-        case REQUEST_FINISHED:
+        case LOGIN_REQUEST:
             return{
                 ...state,
+                isLoading: true
+            }
+        
+        case LOGIN_FINISHED:
+            return{
+                ...state,
+                user: action.payload,
                 isLoading: false,
+                loggedIn: true
+            }
+        
+        case LOG_IN:
+            return{
+                ...state,
+                loggedIn: true
             }
 
-            case GET_REQUEST:
-                return{
-                    ...state,
-                    user: action.payload
-                }
+        case LOG_OUT:
+            return{
+                ...state,
+                loggedIn: false
+            }
+
+        case GET_REQUEST:
+            return{
+                ...state,
+            }
         
-            case REQUEST_LOADING:
-                return{
-                    ...state,
-                    isLoading: true
-                }
-            
-                default:
-                    return state 
+        default:
+            return state 
     }
 }
