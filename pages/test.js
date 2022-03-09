@@ -3,9 +3,13 @@ import { connect } from "react-redux";
 import { Layout } from './components/layout'
 import userAction from "../redux/action/userAction";
 import privateAuth from "../Auth/privateAuth";
+import { Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
+import axios from "axios";
 class Test extends React.Component{
     constructor(props){
         super(props)
+        this.state ={}
     }
     
     set = name => event => {
@@ -14,7 +18,22 @@ class Test extends React.Component{
     }
 
     async componentDidMount(){
+        const config = {
+            headers: {
+                authorization: `${localStorage.getItem('accessToken')}`,
+            },
+        }
+        axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/me`, config)
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    data: res.data.currentUserInfo,
+                    username: res.data.currentUserInfo.username,
+                    description: res.data.currentUserInfo.description,
+                    point: res.data.currentUserInfo.point,
 
+                })
+            })
     }
 
     useEffect(){
@@ -22,51 +41,32 @@ class Test extends React.Component{
     }
 
     handleSubmit = async (event) => {
-        event.preventDefault();
-        const { email, password}  = this.state;
-        const loginData = {
-            email,
-            password
-        }
-        await this.props.loginUser(loginData)
-        console.log(this.props.user.user)
-        console.log(localStorage.getItem('accessToken'))
-        // console.log(this.props.user.user.accessToken)
+        // event.preventDefault();
+        // const { email, password}  = this.state;
+        // const loginData = {
+        //     email,
+        //     password
+        // }
+        // await this.props.loginUser(loginData)
+        // console.log(this.props.user.user)
+        // console.log(localStorage.getItem('accessToken'))
+        // // console.log(this.props.user.user.accessToken)
     }
 
-    signOut = async (event) => {
-        event.preventDefault();
-        localStorage.removeItem('accessToken')
-        console.log(localStorage.getItem('accessToken'))
-    }
     render(){
+        console.log(this.state.data)
+        const { data } = this.state;
         return(
-            <>
             <Layout title='Test'>
-                <div className="container mt-5">
-                    <form onSubmit={this.handleSubmit}>
-                        <input 
-                            type='email' 
-                            className="form-control" 
-                            placeholder="enter email"
-                            onChange={this.set('email')}
-                        />
-
-                        <input 
-                            type='password' 
-                            className="form-control" 
-                            placeholder="enter password"
-                            onChange={this.set('password')}
-                        />
-                        <br/>
-                        <input type='submit' />
-                    </form>
-                { this.props.auth.isLoading == true ? <p style={{ textAlign: 'center' }}>Loading....</p> : null }
-            <br />
-            <button onClick={this.signOut}> Sign Out!</button>
-            </div>
+                <Col xs={8} sm={12} md={12} className="text-center pt-sm-5 pt-xl-5">
+                    <h1>{this.state.username}</h1>
+                    <h1>{this.state.point}</h1>
+                    <h1>{this.state.description}</h1>
+                </Col>
+               {/* <Container>
+                <h1>SIGN UP</h1>                       
+               </Container> */}
             </Layout>
-            </>
         )
     }
 }
