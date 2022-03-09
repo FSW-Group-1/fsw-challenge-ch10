@@ -2,6 +2,7 @@ import axios from "axios";
 import { 
     REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST,
     LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, 
+    REGISTER_FINISHED, REGISTER_REQUEST, REGISTER_FAILED,
     LOG_OUT, LOG_IN
      } from "../types";
 
@@ -13,11 +14,27 @@ const configJSON = {
     }
 }
 
-// const configAuth = {
-//     headers: {
-//         authorization: `${localStorage.getItem('accessToken')}`,
-//     },
-// }
+const registerUser = (dataUser) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: REGISTER_REQUEST,
+        })
+        const { data } = await axios.post(`${apiURL}/register`, dataUser, configJSON);
+        dispatch({
+            type: REGISTER_FINISHED,
+            payload: data.message
+        })
+
+    } catch (error) {
+        dispatch({
+            type: LOGIN_FAILED,
+            payload: error.response.data.result
+        })
+        console.log(error.response.data.result)
+    }
+}
+
+
 const loginUser = (dataUser) => async dispatch => {
     try {
         dispatch({
@@ -30,11 +47,15 @@ const loginUser = (dataUser) => async dispatch => {
         localStorage.setItem('accessToken', data.data.accessToken)
         dispatch({
             type: LOGIN_FINISHED,
-            payload: data.data
+            payload: data.message
         })
 
         // console.log('finished')
     } catch (error) {
+        dispatch({
+            type: LOGIN_FAILED,
+            payload: error.response.data.result
+        })
         console.log(error.response.data.result)
     }
 }
@@ -73,6 +94,7 @@ const checkTokenValid = () => async (dispatch) => {
 }
 
 export default {
+    registerUser,
     loginUser,
     logOut,
     checkTokenValid,

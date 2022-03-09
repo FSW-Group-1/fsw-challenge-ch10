@@ -30,18 +30,8 @@ class Login extends Component{
       if(!email || !password) return alert('Please insert missing credentials!')
       
       await this.props.loginUser(loginData)
-      console.log(this.props.user.user)
-      console.log(localStorage.getItem('accessToken'))
-
+      console.log(this.props.auth.user)
       Router.push('/')
-      //  // Register via Firebase
-      //  try {
-      //     await firebase.auth().signInWithEmailAndPassword(email, password)
-      //      history.push('/');
-      //  } catch(error) {
-      //      alert('Failed to Login')
-      //      console.log(error)
-      //  }
   }
 
   render(){
@@ -85,7 +75,7 @@ class Login extends Component{
             </FormGroup>
           <a href='/forgot-password'>Forgot your password? Click me!</a><br/>
           <Button className='btn-success'>
-            Login
+            { this.props.auth.isLoading == true ? <span>Loading....</span> :  <span>Login!</span>}
           </Button>
         </Form>
         </Container>

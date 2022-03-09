@@ -13,12 +13,6 @@ class Navbars extends Component{
 
     }
 
-    signOut = async (event) => {
-        // event.preventDefault();
-        localStorage.removeItem('accessToken')
-        // console.log(localStorage.getItem('accessToken'))
-    }
-
     componentDidMount(){
         this.props.checkTokenValid()
     }
@@ -26,23 +20,25 @@ class Navbars extends Component{
        
     }
 
-    showLoggedIn = () =>{
-        return(
-            <>
-                <Nav.Link className='border border-success text-success fw-bold' href='/profile'>Profile</Nav.Link>
-                <Nav.Link className='border-end me-1'></Nav.Link>
-                <Nav.Link className='border border-secondary ms-1' onClick={() => this.props.logOut()}>Sign Out</Nav.Link>
-            </>
-        )
-    }
-
-    showLoggedOut = () => {
-        return(
-            <>
-                <Nav.Link href="/login">Login</Nav.Link>
-                <Nav.Link href="/register">Register</Nav.Link>
-            </>
-        )
+    logStatus = () => {
+        if(this.props.auth.loggedIn == true){
+            return(
+                <>
+                    <Nav.Link className='border border-success text-success fw-bold' href='/profile'>Profile</Nav.Link>
+                    <Nav.Link className='border-end me-1'></Nav.Link>
+                    <Nav.Link className='border border-secondary ms-1' onClick={() => this.props.logOut()}>Sign Out</Nav.Link>
+                </>
+            )
+        }else if(this.props.auth.loggedIn == false){
+            return(
+                <>
+                    <Nav.Link href="/login">Login</Nav.Link>
+                    <Nav.Link href="/register">Register</Nav.Link>
+                </>
+            )
+        }else{
+            <Nav.Link href="/">Loading...</Nav.Link>
+        }
     }
 
 
@@ -58,12 +54,10 @@ class Navbars extends Component{
                             <NavDropdown title="Others" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="profile-list">See other user</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                {/* <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
-                                
                             </NavDropdown>
                             </Nav>
                             <Nav>
-                                {this.props.user.loggedIn ? this.showLoggedIn() : this.showLoggedOut()}
+                                {this.logStatus()}
                                 
                             </Nav>
                         </Navbar.Collapse>

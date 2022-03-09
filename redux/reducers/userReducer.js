@@ -1,13 +1,15 @@
 import { 
     REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST,
-    LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, LOG_OUT, LOG_IN
+    LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, 
+    REGISTER_FINISHED, REGISTER_REQUEST, REGISTER_FAILED,
+    LOG_OUT, LOG_IN
      } from "../types";
 
-const initialState = [{
-    user: []
-}]
+// const initialState = [{
+//     user: []
+// }]
 
-export default function(state = initialState, action){
+export const authReducer = (state = {}, action) =>{
     switch(action.type){
         case LOGIN_REQUEST:
             return{
@@ -18,9 +20,15 @@ export default function(state = initialState, action){
         case LOGIN_FINISHED:
             return{
                 ...state,
-                user: action.payload,
+                auth: action.payload,
                 isLoading: false,
                 loggedIn: true
+            }
+        
+        case LOGIN_FAILED:
+            return{
+                ...state,
+                error: action.payload
             }
         
         case LOG_IN:
@@ -35,9 +43,23 @@ export default function(state = initialState, action){
                 loggedIn: false
             }
 
-        case GET_REQUEST:
+        case REGISTER_REQUEST:
             return{
                 ...state,
+                isLoading: true,
+            }
+        
+        case REGISTER_FINISHED:
+            return{
+                ...state,
+                isLoading: false,
+                auth: action.payload,
+            }
+        
+        case REGISTER_FAILED:
+            return{
+                ...state,
+                error: action.payload
             }
         
         default:
