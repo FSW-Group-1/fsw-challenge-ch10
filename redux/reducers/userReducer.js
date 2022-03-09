@@ -1,30 +1,68 @@
-import { REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST} from "../types";
+import { 
+    REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST,
+    LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, 
+    REGISTER_FINISHED, REGISTER_REQUEST, REGISTER_FAILED,
+    LOG_OUT, LOG_IN
+     } from "../types";
 
-const initialState = [{
-    user: []
-}]
+// const initialState = [{
+//     user: []
+// }]
 
-export default function(state = initialState, action){
+export const authReducer = (state = {}, action) =>{
     switch(action.type){
-        case REQUEST_FINISHED:
+        case LOGIN_REQUEST:
+            return{
+                ...state,
+                isLoading: true
+            }
+        
+        case LOGIN_FINISHED:
+            return{
+                ...state,
+                auth: action.payload,
+                isLoading: false,
+                loggedIn: true
+            }
+        
+        case LOGIN_FAILED:
+            return{
+                ...state,
+                error: action.payload
+            }
+        
+        case LOG_IN:
+            return{
+                ...state,
+                loggedIn: true
+            }
+
+        case LOG_OUT:
+            return{
+                ...state,
+                loggedIn: false
+            }
+
+        case REGISTER_REQUEST:
+            return{
+                ...state,
+                isLoading: true,
+            }
+        
+        case REGISTER_FINISHED:
             return{
                 ...state,
                 isLoading: false,
+                auth: action.payload,
             }
-
-            case GET_REQUEST:
-                return{
-                    ...state,
-                    user: action.payload
-                }
         
-            case REQUEST_LOADING:
-                return{
-                    ...state,
-                    isLoading: true
-                }
-            
-                default:
-                    return state 
+        case REGISTER_FAILED:
+            return{
+                ...state,
+                error: action.payload
+            }
+        
+        default:
+            return state 
     }
 }
