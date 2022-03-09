@@ -1,6 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 // import styles from '../styles/Home.module.css'
 // import styles from '../styles/Index.module.css'
 import styles from "../styles/Index.module.css"
@@ -89,7 +87,6 @@ export default class Home extends Component {
   }
 
   render () {
-    console.log(this.state.gameList)
     return (
       <Layout title="Home">
         <div className='bg-black pt-5 pb-5'>
