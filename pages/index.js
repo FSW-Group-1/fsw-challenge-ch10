@@ -3,16 +3,32 @@ import React, { Component } from 'react'
 // import styles from '../styles/Index.module.css'
 import styles from "../styles/Index.module.css"
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Image } from 'react-bootstrap'
 
 import { Layout } from './components/layout'
 import { LoadingAnimation } from './components/loadingAnimation_1'
 
 class GameCard extends Component {
   render () {
+    const { item } = this.props
+    // const imagePath = '../public/assets/game-card-img/rock-paper-scissor.jpg'
+    const imagePath = './rock-paper-scissor.jpg'
+    const image = require('./rock-paper-scissor.jpg')
     return (
       <>
-        <h1>ladida</h1>
+        <button className='text-center p-0 border-0'>
+            <Image style={
+                {
+                    resize:'cover',
+
+                    width: '100%',
+                }
+            } src='./rock-paper-scissor.jpg' className='img-thumbnail'/>
+        </button>
+        <br />
+        <span className='game-list-name'>{item.name}</span>
+        <br />
+        <span style={ { color: 'white', fontSize:'100%' } }>{item.description}</span>
       </>
     )
   }
@@ -39,6 +55,12 @@ export default class Home extends Component {
           imageFileName: "batu-gunting-kertas.jpg",
           name: "Rock Papper Scissor",
           route: "rps"
+        },
+        {
+          description: "Permainan Ular Tangga",
+          imgaeFileName: "ladder-and-snake.jpg",
+          name: "Ladder and Snake",
+          route: "lns"
         }
       ]
       this.setState({
@@ -65,10 +87,19 @@ export default class Home extends Component {
   }
 
   get contentGameList () {
+    const gameList = this.state.gameList
     const games = () => {
       return (
         <>
-          <h2>Data</h2>
+          <Row className='justify-content-center mt-3'>
+            {gameList.map((item, index) => {
+              return(
+                <Col className='col-md-3 col-6 mb-5' key={index}>
+                  <GameCard item={item} />
+                </Col>
+              )
+            })}
+          </Row>
         </>
       )
     }
@@ -95,7 +126,7 @@ export default class Home extends Component {
                 <Row className="justify-content-center mt-xxl-3">
                     <Col xs={12} sm={12} md={8} className="text-center">
                         <h1>PLAY TRADISIONAL GAME</h1>
-                        <p className="body" style={ { fontWeight: 'bold' } }>Exprience new traditional game play</p>
+                        <p className="body" style={ { fontWeight: 'bold' } }>Experience new traditional game play</p>
                     </Col>
                 </Row>
                 <Row className="justify-content-center">
