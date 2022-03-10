@@ -12,7 +12,7 @@ class GameCard extends Component {
     const { item } = this.props
     
     let imagePath_ = "/../public/assets/game-card-img/"
-    imagePath_ = imagePath_ + "rock-paper-scissor.jpg"
+    imagePath_ = imagePath_ + item.imageFileName
 
     return (
       <>
@@ -53,7 +53,7 @@ export default class Home extends Component {
       const list = [
         {
           description: "Permainan Batu Gunting Kertas",
-          imageFileName: "batu-gunting-kertas.jpg",
+          imageFileName: "rock-paper-scissor.jpg",
           name: "Rock Papper Scissor",
           route: "rps"
         },
