@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import userAction from "../redux/action/userAction";
 import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 
+import Router from 'next/router';
 import { Layout } from './components/layout'
 
 class Login extends Component{
@@ -19,8 +20,8 @@ class Login extends Component{
   }
 
   handleSubmit = async(event) => {
+    event.preventDefault();
       const { email, password}  = this.state;
-      event.preventDefault();
       const loginData = {
         email,
         password
@@ -29,20 +30,14 @@ class Login extends Component{
       if(!email || !password) return alert('Please insert missing credentials!')
       
       await this.props.loginUser(loginData)
-      console.log(this.props.user.user)
-      console.log(localStorage.getItem('accessToken'))
-
-      //  // Register via Firebase
-      //  try {
-      //     await firebase.auth().signInWithEmailAndPassword(email, password)
-      //      history.push('/');
-      //  } catch(error) {
-      //      alert('Failed to Login')
-      //      console.log(error)
-      //  }
+      console.log(this.props.auth.user)
+      Router.push('/')
   }
 
   render(){
+    if(this.props.auth.loggedIn == true){
+      Router.push('/')
+    }
       return(
         <>
         <Layout title="Login">
@@ -83,7 +78,7 @@ class Login extends Component{
             </FormGroup>
           <a href='/forgot-password'>Forgot your password? Click me!</a><br/>
           <Button className='btn-success'>
-            Login
+            { this.props.auth.isLoading == true ? <span>Loading....</span> :  <span>Login!</span>}
           </Button>
         </Form>
         </Container>
