@@ -45,24 +45,23 @@ class Navbars extends Component{
     render(){
         return(
             <Navbar collapseOnSelect expand="lg" bg="black" variant="dark" fixed="top">
-                    <Container>
-                        <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                        <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav className="me-auto">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <NavDropdown title="Others" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="profile-list">See other user</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                            </NavDropdown>
-                            </Nav>
-                            <Nav>
-                                {this.logStatus()}
-                                
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
+                <Container>
+                    <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <NavDropdown title="Others" id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="profilelist">See other user</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                        </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            {this.logStatus()}                
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         )
     }
     

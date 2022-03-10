@@ -2,6 +2,7 @@ import {
     REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST,
     LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, 
     REGISTER_FINISHED, REGISTER_REQUEST, REGISTER_FAILED,
+    UPDATE_FINISHED, UPDATE_REQUEST, UPDATE_FAILED,
     LOG_OUT, LOG_IN
      } from "../types";
 
@@ -61,8 +62,31 @@ export const authReducer = (state = {}, action) =>{
                 ...state,
                 error: action.payload
             }
-        
+        case UPDATE_REQUEST:
+            return{
+                ...state,
+                isLoading: true
+            }
+            
+        case UPDATE_FINISHED:
+            return{
+                ...state,
+                isLoading: false
+            }
+            
+        case UPDATE_FAILED:
+            return{
+                ...state,
+                error: action.payload
+            }
+                
         default:
             return state 
+    }
+}
+
+export const userReducer = (state = {}, action) => {
+    switch (action.type) {
+        
     }
 }

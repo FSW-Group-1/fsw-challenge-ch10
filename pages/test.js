@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 import { Layout } from './components/layout'
 import userAction from "../redux/action/userAction";
 import privateAuth from "../Auth/privateAuth";
+import { Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
+import axios from "axios";
 class Test extends React.Component{
     constructor(props){
         super(props)
+        this.state ={
+            data: {}
+        }
     }
     
     set = name => event => {
@@ -14,7 +20,19 @@ class Test extends React.Component{
     }
 
     async componentDidMount(){
+        const config = {
+            headers: {
+                authorization: `${localStorage.getItem('accessToken')}`,
+            },
+        }
+        axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/users`)
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    data: res.data.data
 
+                })
+            })
     }
 
     useEffect(){
@@ -22,55 +40,59 @@ class Test extends React.Component{
     }
 
     handleSubmit = async (event) => {
-        event.preventDefault();
-        const { email, password}  = this.state;
-        const loginData = {
-            email,
-            password
-        }
-        await this.props.loginUser(loginData)
-        console.log(this.props.user.user)
-        console.log(localStorage.getItem('accessToken'))
-        // console.log(this.props.user.user.accessToken)
+        
     }
 
-    signOut = async (event) => {
-        event.preventDefault();
-        localStorage.removeItem('accessToken')
-        console.log(localStorage.getItem('accessToken'))
-    }
     render(){
+        console.log(this.state.data)
+        const { data } = this.state;
         return(
-            <>
             <Layout title='Test'>
-                <div className="container mt-5">
-                    <form onSubmit={this.handleSubmit}>
-                        <input 
-                            type='email' 
-                            className="form-control" 
-                            placeholder="enter email"
-                            onChange={this.set('email')}
-                        />
-
-                        <input 
-                            type='password' 
-                            className="form-control" 
-                            placeholder="enter password"
-                            onChange={this.set('password')}
-                        />
-                        <br/>
-                        <input type='submit' />
-                    </form>
-                { this.props.auth.isLoading == true ? <p style={{ textAlign: 'center' }}>Loading....</p> : null }
-            <br />
-            <button onClick={this.signOut}> Sign Out!</button>
-            </div>
+                <br />
+                <br />
+                {Object.keys(data).map(function(name, index){
+                    return(
+                        <div>
+                            <h1>{index}. {data[name].username} → {data[name].id}</h1>
+                        </div>
+                    )
+                })}
+                {/* <Col xs={8} sm={12} md={12} className="text-center pt-sm-5 pt-xl-5">
+                    <h1>{this.state.username}</h1>
+                    <h1>{this.state.point}</h1>
+                    <h1>{this.state.description}</h1>
+                </Col> */}
             </Layout>
-            </>
         )
     }
 }
 
+
+// const Test = (props) => {
+//     const [data, setData] = useState({})
+
+//     useEffect(() => {
+//         axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/users`)
+//                     .then(res => {
+//                         console.log(res)
+//                         setData(res.data.data)
+//                     })
+//     }, [])
+
+//     console.log(data)
+
+//     return(
+//         <div>
+//             {Object.keys(data).map(function(name, index){
+//                     return(
+//                         <div key={index}>
+//                             <h1>{index}. {data[name].username} → {data[name].id}</h1>
+//                         </div>
+//                     )
+//                 })}
+//         </div>
+//     )
+// }
 export default connect(
     state => state,
     userAction
