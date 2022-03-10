@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Card, Col, Row, Container, Form, Button, Modal, } from 'react-bootstrap';
-import { Component} from './components/layout'
+import { Layout } from './components/layout'
 
-// import firebase from '../auth/firebase';
+import axios from 'axios';
+import { connect } from "react-redux";
+import userAction from "../redux/action/userAction";
 
 
 
-class profile extends Component{
+class Profile extends Component{
 
 
   constructor(props){
     super(props);
 
     this.state ={
-      show: false
+      show: false,
+      data: {}
     };
 
   }
@@ -24,67 +27,60 @@ class profile extends Component{
   }
 
   componentDidMount(){
-    this.fetchData()
+    const config = {
+      headers: {
+          authorization: `${localStorage.getItem('accessToken')}`,
+      },
   }
+  axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/me`, config)
+      .then(res => {
+          // console.log(res)
+          this.setState({
+              data: res.data.data,
+              username: res.data.data.username,
+              description: res.data.data.description,
+              point: res.data.data.point,
+              image: res.data.data.imageLink
+          })
+      })
+}
 
-  async fetchData(){
-    try{
-      let userID = firebase.auth().currentUser
-      let profileDB = await firebase.database().ref(`profile/${userID.uid}`).once('value')
-      this.setState({
-        username: userID.displayName,
-        level: profileDB.val().point,
-        description: profileDB.val().description,
-        image: profileDB.val().imageLink
+  handleSubmit = async (event) => {
+    const {username, description, image} = this.state;
+    event.preventDefault()
+
+    if(description.length > 200){
+      return alert('Your description has surpassed the maximum amount!')
+    }
+    try {
+      await this.props.updateUser({
+        username,
+        description,
+        imageLink: image
       })
 
-    }
-    catch(err){
+      alert('Your information has been updated!')
+    } catch (err) {
       console.log(err)
     }
   }
 
-  handleSubmit = async (event) => {
-//     const {username, description, image} = this.state;
-//     let userID = firebase.auth().currentUser
-//     let profileDB = firebase.database().ref(`profile/${userID.uid}`)
-//     event.preventDefault()
-
-//     console.log(description.length)
-//     if(description.length > 200){
-//       return alert('Your description has surpassed the maximum amount!')
-//     }
-//     try {
-//       await profileDB.update(
-//             {
-//               username: username,
-//               description: description,
-//               imageLink: image
-//             }).then(userID.updateProfile({
-//               displayName: username
-//             }))
-//       alert('Your Profile has been updated!')
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
-
-//   handleClose = () =>{
-//     this.setState({
-//       show: false
-//     })
-//   }
+  handleClose = () =>{
+    this.setState({
+      show: false
+    })
+  }
   
-//   handleShow = () => {
-//     this.setState({
-//       show: true
-//     })
+  handleShow = () => {
+    this.setState({
+      show: true
+    })
   }
   
   render(){
       
       return (
-        <Layout tittle="profile">
+        <Layout title="Profile">
       <div>
         <Container className='mt-5 justify-content-center'>
           <h1>Your Profile</h1>
@@ -109,7 +105,7 @@ class profile extends Component{
                     />
                   </Card.Title>
                   <Card.Text className='form-control border-0'>
-                  Level: {this.state.level}
+                  point: {this.state.point}
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -145,7 +141,8 @@ class profile extends Component{
                 </Card.Text>
                 </Card.Body>
               </Card>
-              <input type="submit" value="Submit" className=' btn btn-success'/>
+            { this.props.auth.isLoading == true ? <input type="submit" value="Loading..." className=' btn btn-success'/> : <input type="submit" value="Submit" className=' btn btn-success'/>}
+              
             </Col>
             </Row>
           </form>
@@ -156,5 +153,8 @@ class profile extends Component{
 }
 }
 
-export default profile;
+export default connect(
+  state => state,
+  userAction
+)(Profile)
 
