@@ -3,6 +3,7 @@ import {
     REQUEST_FINISHED, REQUEST_LOADING, GET_REQUEST,
     LOGIN_FINISHED, LOGIN_REQUEST, LOGIN_FAILED, 
     REGISTER_FINISHED, REGISTER_REQUEST, REGISTER_FAILED,
+    UPDATE_FINISHED, UPDATE_REQUEST, UPDATE_FAILED,
     LOG_OUT, LOG_IN
      } from "../types";
 
@@ -94,9 +95,30 @@ const checkTokenValid = () => async (dispatch) => {
     }
 }
 
+const updateUser = (userData) => async (dispatch) => {
+    const config = {
+        headers: {
+            authorization: `${localStorage.getItem('accessToken')}`,
+        },
+    }
+    try {
+        dispatch({
+            type: UPDATE_REQUEST
+        })
+        const{ data } = await axios.post(`${apiURL}/me/update`, userData, config)
+        dispatch({
+            type: UPDATE_FINISHED,
+            payload: data.message  
+        })
+    } catch (error) {
+        
+    }
+}
+
 export default {
     registerUser,
     loginUser,
     logOut,
     checkTokenValid,
+    updateUser,
 }
