@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-// import styles from '../styles/Home.module.css'
-// import styles from '../styles/Index.module.css'
 import styles from "../styles/Index.module.css"
 
-import { Container, Row, Col, Image} from 'react-bootstrap'
+import { Container, Row, Col} from 'react-bootstrap'
+import Image from 'next/image'
 
 import { Layout } from './components/layout'
 import { LoadingAnimation } from './components/loadingAnimation_1'
@@ -11,21 +10,23 @@ import { LoadingAnimation } from './components/loadingAnimation_1'
 class GameCard extends Component {
   render () {
     const { item } = this.props
-    // const imagePath = '../public/assets/game-card-img/rock-paper-scissor.jpg'
-    const image = require('../public/assets/game-card-img/rock-paper-scissor.jpg')
-    let imagePath = '..'
-    imagePath = imagePath + image.default.src
+    
+    let imagePath_ = "/../public/assets/game-card-img/"
+    imagePath_ = imagePath_ + "rock-paper-scissor.jpg"
 
-    // console.log(image)
+    console.log(imagePath_)
+
     return (
       <>
         <button className='text-center p-0 border-0'>
-            <Image style={
-                {
-                    resize:'cover',
-                    width: '100%',
-                }
-            } src={imagePath} className='img-thumbnail'/>
+            <Image
+              alt="Mountains"
+              src={imagePath_}
+              width="200%"
+              height="100%"
+              objectFit="cover"
+              quality={100}
+            />
         </button>
         <br />
         <span style={ { color: 'yellow', fontSize:'100%' } }>{item.name}</span>
