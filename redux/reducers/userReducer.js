@@ -71,7 +71,6 @@ export const authReducer = (state = {}, action) =>{
         case UPDATE_FINISHED:
             return{
                 ...state,
-                auth: action.payload,
                 isLoading: false
             }
             

@@ -108,7 +108,26 @@ const updateUser = (userData) => async (dispatch) => {
         const{ data } = await axios.post(`${apiURL}/me/update`, userData, config)
         dispatch({
             type: UPDATE_FINISHED,
-            payload: data.message  
+        })
+    } catch (error) {
+        
+    }
+}
+
+const updateScore = (userData) => async (dispatch) => {
+    const config = {
+        headers: {
+            authorization: `${localStorage.getItem('accessToken')}`,
+        },
+    }
+
+    try {
+        dispatch({
+            type: UPDATE_REQUEST
+        })
+        const{ data } = await axios.post(`${apiURL}/score`, userData, config)
+        dispatch({
+            type: UPDATE_FINISHED
         })
     } catch (error) {
         
@@ -121,4 +140,5 @@ export default {
     logOut,
     checkTokenValid,
     updateUser,
+    updateScore,
 }
