@@ -14,17 +14,15 @@ class GameCard extends Component {
     let imagePath_ = "/../public/assets/game-card-img/"
     imagePath_ = imagePath_ + "rock-paper-scissor.jpg"
 
-    console.log(imagePath_)
-
     return (
       <>
         <button className='text-center p-0 border-0'>
             <Image
-              alt="Mountains"
+              alt="Game thumbnail"
               src={imagePath_}
-              width="200%"
-              height="100%"
-              objectFit="cover"
+              width={300}
+              height={150}
+              objectFit="fit"
               quality={100}
             />
         </button>
