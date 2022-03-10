@@ -23,13 +23,12 @@ class GameCard extends Component {
             <Image style={
                 {
                     resize:'cover',
-
                     width: '100%',
                 }
             } src={imagePath} className='img-thumbnail'/>
         </button>
         <br />
-        <span className='game-list-name'>{item.name}</span>
+        <span style={ { color: 'yellow', fontSize:'100%' } }>{item.name}</span>
         <br />
         <span style={ { color: 'white', fontSize:'100%' } }>{item.description}</span>
       </>
