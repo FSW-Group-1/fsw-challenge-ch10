@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import styles from '../styles/Index.module.css'
 import styles from "../styles/Index.module.css"
 
-import { Container, Row, Col, Image } from 'react-bootstrap'
+import { Container, Row, Col, Image} from 'react-bootstrap'
 
 import { Layout } from './components/layout'
 import { LoadingAnimation } from './components/loadingAnimation_1'
@@ -12,8 +12,11 @@ class GameCard extends Component {
   render () {
     const { item } = this.props
     // const imagePath = '../public/assets/game-card-img/rock-paper-scissor.jpg'
-    const imagePath = './rock-paper-scissor.jpg'
-    const image = require('./rock-paper-scissor.jpg')
+    const image = require('../public/assets/game-card-img/rock-paper-scissor.jpg')
+    let imagePath = '..'
+    imagePath = imagePath + image.default.src
+
+    // console.log(image)
     return (
       <>
         <button className='text-center p-0 border-0'>
@@ -23,7 +26,7 @@ class GameCard extends Component {
 
                     width: '100%',
                 }
-            } src='./rock-paper-scissor.jpg' className='img-thumbnail'/>
+            } src={imagePath} className='img-thumbnail'/>
         </button>
         <br />
         <span className='game-list-name'>{item.name}</span>
@@ -61,6 +64,18 @@ export default class Home extends Component {
           imgaeFileName: "ladder-and-snake.jpg",
           name: "Ladder and Snake",
           route: "lns"
+        },
+        {
+          description: "Permainan Congklak",
+          imageFileName: "conglak.jpg",
+          name: "Congklak",
+          route: "congklak"
+        },
+        {
+          description: "Permaianan Karambol",
+          imageFileName: "carambol.jpg",
+          name: "Karambol",
+          route: "karambol"
         }
       ]
       this.setState({
