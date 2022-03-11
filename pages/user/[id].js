@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react'
 import { Card, Col, Row, Container, Form, Button, Modal, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'react-bootstrap'
-import { Layout } from '../components/layout'
+import Layout from '../components/layout'
 import { useRouter } from 'next/router'
 import style from '../../styles/Profile.module.css'
 import Image from 'next/image'
@@ -25,7 +25,7 @@ function DetailUser() {
   function showImage() {
     let imagePath_ = '/../public/assets/game-card-img/'
     if (!data.imageLink) {
-      return <Image width={300} height={150} objectFit="fit" quality={100} src={imagePath_ + 'dummy.png'} className="img-thumbnail" />
+      return <Image alt='image' width={300} height={150} objectFit="fit" quality={100} src={"/_next/static/media/dummy.75d624b0.png"} className="img-thumbnail" />
     } else {
       return (
         <Card.Img
@@ -67,10 +67,6 @@ function DetailUser() {
             <Row style={{ marginTop: '100px', textAlign: 'center' }}>
               <h3>Game History</h3>
               {Object.keys(data.Details).map(function (name, index) {
-                let imagePath_ = '/../public/assets/game-card-img/'
-                if (!data.Details[name].Game.imageLink) {
-                  data.Details[name].Game.imageLink = 'dummy.png'
-                }
                 return (
                   <Card style={{ width: '18rem' }} key={index} className="m-3 bg-dark p-1">
                     <Image
@@ -78,8 +74,9 @@ function DetailUser() {
                       height={150}
                       objectFit="fit"
                       quality={100}
-                      src={imagePath_ + data.Details[name].Game.imageLink}
+                      src={data.Details[name].Game.imageLink}
                       className="img-thumbnail"
+                      alt='image'
                     />
                     <span className="text-white text-center fs-3 ">{data.Details[name].Game.name}</span>
                     <span className="text-white text-center fs-6 fw-light ">Point: {data.Details[name].point}</span>

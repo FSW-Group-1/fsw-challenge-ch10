@@ -3,10 +3,10 @@ import { Button } from 'reactstrap';
 import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 import { connect } from "react-redux";
 
-import { Layout } from './components/layout'
+import Layout from './components/layout'
 import userAction from "../redux/action/userAction";
 import Router from 'next/router';
-import { LoadingAnimation } from './components/loadingAnimation_1'
+import LoadingAnimation from './components/loadingAnimation_1'
 
 
 class Register extends Component{

@@ -5,19 +5,19 @@ import axios from 'axios';
 import { Container, Row, Col} from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { Layout } from './components/layout'
-import { LoadingAnimation } from './components/loadingAnimation_1'
-
+import img from '../public/assets/game-card-img/rock-paper-scissor.jpg'
+import Layout  from './components/layout'
+import LoadingAnimation  from './components/loadingAnimation_1'
+import dummy from '../public/assets/game-card-img/dummy.png'
 class GameCard extends Component {
   render () {
     const { item } = this.props
-    
+    console.log(img)
     let imagePath_ = "/../public/assets/game-card-img/"
     if(!item.imageLink) {
         item.imageLink = "dummy.png"
     }    
-    imagePath_ = imagePath_ + item.imageLink
+    imagePath_ = imagePath_ 
 
     const linkHref = '/game-detail/'+item.id 
 
@@ -26,13 +26,15 @@ class GameCard extends Component {
         <Link href={linkHref} className='text-center p-0 border-0'>
             <Image
               alt="Game thumbnail"
-              src={imagePath_}
+              src={item.imageLink}
               width={300}
               height={150}
               objectFit="fit"
               quality={100}
             />
+
         </Link>
+          
         <br />
         <span style={ { color: 'yellow', fontSize:'100%' } }>{item.name}</span>
         <br />
