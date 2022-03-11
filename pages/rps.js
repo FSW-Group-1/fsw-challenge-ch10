@@ -97,7 +97,7 @@ const RPS = (props) => {
     if(indexResult == null || indexResult ==  -1){
       return(<div>Loading...</div>)
     }else{
-      return(<Image src={choices[indexResult].icon} />)
+      return(<Image src={choices[indexResult].icon} alt='halo'/>)
     }
   }
   
@@ -235,13 +235,9 @@ const RPS = (props) => {
         <ModalHeader toggle={toggle}>Hasil Permainan</ModalHeader>
         <ModalBody>Hasil : {finalResult}</ModalBody>
         <ModalFooter>
-              {/* <button className='btn btn-secondary link-light text-white'> */}
-                <Link href='/'>
-                  <button className='btn btn-secondary text-white'>
-                    Selesai
-                  </button>
-                </Link>
-              {/* </button> */}
+          <Button color="secondary">
+            <a href='/'  className='link-light'>Selesai</a> 
+          </Button>{' '}
           <Button color="primary" onClick={resetRound}>
             Lanjut Lagi
           </Button>
