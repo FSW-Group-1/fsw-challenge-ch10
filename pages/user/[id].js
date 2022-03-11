@@ -25,7 +25,7 @@ function DetailUser() {
   function showImage() {
     let imagePath_ = '/../public/assets/game-card-img/'
     if (!data.imageLink) {
-      return <Image alt='image' width={300} height={150} objectFit="fit" quality={100} src={imagePath_ + 'dummy.png'} className="img-thumbnail" />
+      return <Image alt='image' width={300} height={150} objectFit="fit" quality={100} src={"/_next/static/media/dummy.75d624b0.png"} className="img-thumbnail" />
     } else {
       return (
         <Card.Img
@@ -67,10 +67,6 @@ function DetailUser() {
             <Row style={{ marginTop: '100px', textAlign: 'center' }}>
               <h3>Game History</h3>
               {Object.keys(data.Details).map(function (name, index) {
-                let imagePath_ = '/../public/assets/game-card-img/'
-                if (!data.Details[name].Game.imageLink) {
-                  data.Details[name].Game.imageLink = 'dummy.png'
-                }
                 return (
                   <Card style={{ width: '18rem' }} key={index} className="m-3 bg-dark p-1">
                     <Image
