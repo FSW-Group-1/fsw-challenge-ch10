@@ -96,7 +96,6 @@ export default class Home extends Component {
     const games = () => {
       return (
         <>
-        <img src="/assets/game-card-img/rock-paper-scissor.jpg" alt="Game"/>
           <Row className='justify-content-center mt-3'>
             {gameList.map((item, index) => {
               return(
