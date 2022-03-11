@@ -7,6 +7,7 @@ import { Container, Row, Col} from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import styles from '../../styles/GameDetail.module.css'
 
 const GameDetail = () => {
     const router = useRouter()
@@ -15,7 +16,13 @@ const GameDetail = () => {
     return(
         <>
             <Layout>
-                <p>Post: {url} </p>
+                    <Container className={styles.header} fluid>
+                        <div className='pt-3 pb-3'>
+                            <Container>
+                                <h1>lalala</h1>
+                            </Container>
+                        </div>
+                    </Container>
             </Layout>
         </>
     )
