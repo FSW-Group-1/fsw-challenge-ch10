@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import styles from '../../styles/components/loadingAnimation_1.module.css'
 
-export function LoadingAnimation () {
+function LoadingAnimation () {
     return(
         <>
             <div className={styles.loader}>
@@ -14,3 +14,5 @@ export function LoadingAnimation () {
         </>
     )
 }
+
+export default LoadingAnimation

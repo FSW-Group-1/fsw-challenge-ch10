@@ -235,9 +235,11 @@ const RPS = (props) => {
         <ModalHeader toggle={toggle}>Hasil Permainan</ModalHeader>
         <ModalBody>Hasil : {finalResult}</ModalBody>
         <ModalFooter>
-          <Button color="secondary">
-            <a href='/'  className='link-light'>Selesai</a> 
-          </Button>{' '}
+            <Link href='/'  className='link-light'>
+              <Button color="secondary">
+                Selesai
+              </Button>{' '}
+            </Link> 
           <Button color="primary" onClick={resetRound}>
             Lanjut Lagi
           </Button>
