@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Col, Row, Container, Form, Button, Modal, } from 'react-bootstrap';
 import { Layout } from './components/layout'
-
+import {  ListGroup, ListGroupItem } from 'react-bootstrap';
+import Image from 'next/image'
 import axios from 'axios';
 import { connect } from "react-redux";
 import userAction from "../redux/action/userAction";
@@ -34,13 +35,14 @@ class Profile extends Component{
   }
   axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/me`, config)
       .then(res => {
-          // console.log(res)
+          console.log(res)
           this.setState({
               data: res.data.data,
               username: res.data.data.username,
               description: res.data.data.description,
               point: res.data.data.point,
-              image: res.data.data.imageLink
+              image: res.data.data.imageLink,
+              details: res.data.data.Details
           })
       })
 }
@@ -65,6 +67,33 @@ class Profile extends Component{
     }
   }
 
+  showDetails = () => {
+    const { details } = this.state;
+    if(details != undefined){
+      {Object.keys(details).map(function (name, index){
+        console.log(details[name].point)
+        return(
+          <Card style={{ width: '18rem' }} key={index} className='m-3'> 
+            <Card.Img variant="top" 
+              style={{width: '100%', height: '15vw', objectFit: 'contain'}}
+              src={details[name].Game.imageLink}
+              alt='game'
+              className='rounded-3 img-thumbnail'
+              />
+              <Card.Title>{details[name].Game.name}</Card.Title>
+              <Card.Body>
+                  <ListGroup className="list-group-flush">
+                  <ListGroupItem>Description: {details[name].Game.description}</ListGroupItem>
+                  <ListGroupItem>Point: {details[name].point}</ListGroupItem>
+              </ListGroup>
+              </Card.Body>
+            </Card>
+        )}
+      )}
+    }
+
+     
+  }
   handleClose = () =>{
     this.setState({
       show: false
@@ -78,7 +107,7 @@ class Profile extends Component{
   }
   
   render(){
-      
+    const { details } = this.state;
       return (
         <Layout title="Profile">
       <div>
@@ -142,14 +171,34 @@ class Profile extends Component{
                 </Card.Body>
               </Card>
             { this.props.auth.isLoading == true ? <input type="submit" value="Loading..." className=' btn btn-success'/> : <input type="submit" value="Submit" className=' btn btn-success'/>}
-              
+            
             </Col>
             </Row>
           </form>
+          <Row>
+              {/* {details != undefined ? this.showDetails() : <div>Loading...</div>} */}
+          {details != undefined ? (
+            Object.keys(details).map(function (name, index){
+              console.log(details[name].point)
+              return(
+                <Card style={{ width: '18rem' }} key={index} className='m-3 bg-dark p-1'> 
+                  <Card.Img variant="top" 
+                    style={{resize:'cover', width: '100%',}}
+                    src={details[name].Game.imageLink}
+                    // alt='game'
+                    className='img-thumbnail'
+                    />
+                    <span className='text-white text-center fs-3 '>{details[name].Game.name}</span>
+                    <span className='text-white text-center fs-6 fw-light '>Point: {details[name].point}</span>
+                  </Card>
+              )}
+            )
+          ) : <div>Loading...</div>}
+          </Row>
         </Container>
       </div>
       </Layout>
-      );
+      )
 }
 }
 
