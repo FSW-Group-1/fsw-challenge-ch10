@@ -12,12 +12,12 @@ import LoadingAnimation  from './components/loadingAnimation_1'
 class GameCard extends Component {
   render () {
     const { item } = this.props
-    let imagePath_ = ""
+    
+    let imagePath_ = "../public/assets/game-card-img/"
     if(!item.imageLink) {
-        item.imageLink = staticPathDummy
+        item.imageLink = "dummy.png"
     }    
-    imagePath_ =  item.imageLink
-    // imagePath_ = imagePath_ + item.imageLink
+    imagePath_ = imagePath_ + item.imageLink
 
     const linkHref = '/game-detail/'+item.id 
 
