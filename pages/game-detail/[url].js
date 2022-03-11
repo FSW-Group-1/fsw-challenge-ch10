@@ -1,54 +1,60 @@
+import React, { Component, useEffect, useState } from "react"
 import { useRouter } from "next/router";
+import { Layout } from '../components/layout';
+import { LoadingAnimation } from '../components/loadingAnimation_1'
 
-import React, { Component } from "react"
+import { Container, Row, Col} from 'react-bootstrap'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import LoadingAnimation from '../components/loadingAnimation_1'
+import styles from '../../styles/GameDetail.module.css'
 
-export default class GameDetail extends Component {
-    constructor (props) {
-        super(props)
-        this.state = {
-            name: null,
-            imageLink: null,
-            gameLink: null,
-            description: null,
-            isLoading: true
-        }
-    }
+import axios from 'axios'
 
-    componentDidMount () {
-        const router = useRouter()
-        const { url } = router.query
-        this.setState({
-            name: url,
-            isLoading: false
-        })
-    }
+const GameDetail = () => {
+    const router = useRouter()
+    const { url } = router.query
+    let gameUrl = 'https://fsw-challenge-ch10-api-dev.herokuapp.com/api/gamedetail/1'
+    // gameUrl = gameUrl + url
 
-    get LoadingContent () {
-        return(
-          <>
-            <br />
-            <br />
-            <br />
-            <LoadingAnimation />
-          </>
-        )
-    }
+    const [data, setData] = useState()
 
-    get Content () {
-        return(
-            <>
-                <h1>Content</h1>
-            </>
-        )
-    }
+    useEffect(() => {
+        try {
+            const config = {
+              headers: {
+                  authorization: `${localStorage.getItem('accessToken')}`,
+              },
+            }
+            axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/allgame`, config)
+              .then(res => {
+                this.setState({
+                    gameList: res.data.data,
+                    isLoading: false
+                })
+            })
+      
+          } catch (error) {
+            console.log(error)
+            this.setState({
+              isLoading: false
+            })
+          }
+    })
 
-    render () {
-        return(
-            <>
-                {this.state.isLoading ? this.LoadingContent : this.Content}
-            </>
-        )
-    }
+    return(
+        <>
+            <Layout>
+                    <Container className={styles.header} fluid>
+                        <div className='pt-3 pb-3'>
+                            <Container>
+                                <h1>lalala</h1>
+                            </Container>
+                        </div>
+                    </Container>
+            </Layout>
+        </>
+    )
 }
+
+export default GameDetail
