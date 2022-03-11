@@ -12,11 +12,12 @@ function DetailUser() {
   const { id } = router.query
   const [handleShow, setHandleShow] = useState(false)
   const [handleSubmit, setHandleSubmit] = useState(false)
-  const [img, setimg] = useState(`https://i.picsum.photos/id/305/200/300.jpg?hmac=qqxVDT5GPIxyVNSo9Y_9u_qZSwXU4Cy94gp7VAMVRIw`)
+  const [data, setData] = useState('')
 
   useEffect(() => {
     axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/user/${id}`).then((res) => {
-      console.log(res)
+      console.log(res.data.data)
+      setData(res.data.data)
     })
   }, [])
 
@@ -26,23 +27,21 @@ function DetailUser() {
         <div className={style.container}>
           <div className={style.card}>
             <div className={style.upper}>
-              <Image src={img} width="100%" height="100%" className="img-fluid" />
+              <Card.Img variant="top" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={data.imageLink} alt="game" />
             </div>
-            <div className={style.user}>
-              <div className={style.profile}>{/* <img src="https://i.imgur.com/JgYD2nQ.jpg" className="rounded-circle" width="80">  */}</div>
-            </div>
-            <div className="mt-5 text-center">
-              <h4 className="mb-0">Benjamin Tims</h4> <span className="text-muted d-block mb-2">Los Angles</span>{' '}
-              <button className={`btn btn-primary btn-sm ${style.follow}`}>Follow</button>
-              <div className="d-flex justify-content-between align-items-center mt-4 px-4">
+            <div className="mt-4 text-center">
+              <h4 className="mb-0">{data.username}</h4>
+              <button className={`btn btn-primary btn-sm mt-2 ${style.follow}`}>{data.email}</button>
+              <p className="my-2">{data.description}</p>
+              <div className="d-flex justify-content-between align-items-center mt-5 px-4">
                 <div className={style.stats}>
-                  <h6 className="mb-0">Followers</h6> <span>8,797</span>
+                  <h6 className="mb-0">Game Played</h6> {data.Details && <span>{data.Details.length}</span>}
                 </div>
                 <div className={style.stats}>
-                  <h6 className="mb-0">Projects</h6> <span>142</span>
-                </div>
-                <div className={style.stats}>
-                  <h6 className="mb-0">Ranks</h6> <span>129</span>
+                  <h6 className="mb-0">Point</h6>
+                  <span>
+                    {data.point == null && '0'} {data.point != null && data.point}{' '}
+                  </span>
                 </div>
               </div>
             </div>
