@@ -54,33 +54,6 @@ export default class Home extends Component {
 
   async getGameList () {
     try {
-      // const list = [
-      //   {
-      //     description: "Permainan Batu Gunting Kertas",
-      //     imageLink: "rock-paper-scissor.jpg",
-      //     name: "Rock Papper Scissor",
-      //     route: "rps"
-      //   },
-      //   {
-      //     description: "Permainan Ular Tangga",
-      //     imgaeLink: "ladder-and-snake.jpg",
-      //     name: "Ladder and Snake",
-      //     route: "lns"
-      //   },
-      //   {
-      //     description: "Permainan Congklak",
-      //     imageLink: "conglak.jpg",
-      //     name: "Congklak",
-      //     route: "congklak"
-      //   },
-      //   {
-      //     description: "Permaianan Karambol",
-      //     imageLink: "carambol.jpg",
-      //     name: "Karambol",
-      //     route: "karambol"
-      //   }
-      // ]
-
       const config = {
         headers: {
             authorization: `${localStorage.getItem('accessToken')}`,
@@ -93,11 +66,6 @@ export default class Home extends Component {
             isLoading: false
           })
         })
-
-      // this.setState({
-      //   gameList: list,
-      //   isLoading: false
-      // })
 
     } catch (error) {
       console.log(error)
