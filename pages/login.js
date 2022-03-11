@@ -6,6 +6,7 @@ import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 
 import Router from 'next/router';
 import { Layout } from './components/layout'
+import { LoadingAnimation } from './components/loadingAnimation_1'
 
 class Login extends Component{
   
@@ -78,7 +79,7 @@ class Login extends Component{
             </FormGroup>
           <a href='/forgot-password'>Forgot your password? Click me!</a><br/>
           <Button className='btn-success'>
-            { this.props.auth.isLoading == true ? <span>Loading....</span> :  <span>Login!</span>}
+            { this.props.auth.isLoading == true ? <LoadingAnimation /> :  <span>Login!</span>}
           </Button>
         </Form>
         </Container>
