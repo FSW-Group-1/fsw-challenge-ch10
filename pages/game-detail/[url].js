@@ -11,38 +11,88 @@ import styles from '../../styles/GameDetail.module.css'
 
 import axios from 'axios'
 
-
-
 const GameDetail = () => {
     const router = useRouter()
     const { url } = router.query
-    let gameUrl = 'https://fsw-challenge-ch10-api-dev.herokuapp.com/api/gamedetail/1'
-    // gameUrl = gameUrl + url
+    let gameUrl = 'https://fsw-challenge-ch10-api-dev.herokuapp.com/api/gamedetail/'
+    gameUrl = gameUrl + url
 
     const [data, setData] = useState()
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        try {
-            const config = {
-              headers: {
-                  authorization: `${localStorage.getItem('accessToken')}`,
-              },
-            }
-            axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/allgame`, config)
-              .then(res => {
-                this.setState({
-                    gameList: res.data.data,
-                    isLoading: false
+        if(isLoading) {
+            try {
+                const config = {
+                  headers: {
+                      authorization: `${localStorage.getItem('accessToken')}`,
+                  },
+                }
+                axios.get(gameUrl, config)
+                  .then(res => {
+                    setData(res.data.data)
+                    setIsLoading(false)
                 })
-            })
-      
-          } catch (error) {
-            console.log(error)
-            this.setState({
-              isLoading: false
-            })
-          }
+          
+              } catch (error) {
+                console.log(error)
+                setIsLoading({
+                  isLoading: false
+                })
+            }
+        }
     })
+
+    const loadingContent = () => {
+        return (
+            <LoadingAnimation />
+        )
+    }
+
+    const content = () => {
+        let imagePath_ = "/../public/assets/game-card-img/"
+        if(!data.imageLink) {
+            data.imageLink = "dummy.png"
+        }    
+        imagePath_ = imagePath_ + data.imageLink
+        const gameLink = data.gameLink
+        return (
+            <>
+                <h1 className="">{data.name}</h1>
+                <Row className="justify-content-center">
+                    <Col md={5}>
+                        <Image
+                            alt="Game thumbnail"
+                            src={imagePath_}
+                            width={500}
+                            height={250}
+                            objectFit="fit"
+                            quality={100}
+                        />
+                    </Col>   
+                    <Col md={5}>
+                        <Row>
+                            <Col>
+                                <p>{data.description}</p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <a href={gameLink} className="btn main-button btn-warning mt-3" id='text-main-button'  style={
+                                    {
+                                        whiteSpace: 'nowrap',
+                                        fontWeight: 'bold'
+                                    }
+                                }>
+                                    PLAY NOW  
+                                </a>
+                            </Col>
+                        </Row>
+                    </Col>   
+                </Row>    
+            </>
+        )
+    }
 
     return(
         <>
@@ -50,7 +100,8 @@ const GameDetail = () => {
                     <Container className={styles.header} fluid>
                         <div className='pt-3 pb-3'>
                             <Container>
-                                <h1>lalala</h1>
+                                { isLoading ?  loadingContent() : content()}
+                                {/* <h1>{data.name}</h1> */}
                             </Container>
                         </div>
                     </Container>
