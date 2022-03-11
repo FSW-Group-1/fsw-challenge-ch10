@@ -74,7 +74,7 @@ const GameDetail = () => {
                     <Col md={5}>
                         <Image
                             alt="Game thumbnail"
-                            src={imagePath_}
+                            src={data.imageLink}
                             width={500}
                             height={250}
                             objectFit="fit"

@@ -181,7 +181,7 @@ class Profile extends Component {
                         alt='game'
                         objectFit="fit"
                         quality={100}
-                        src={imagePath_ + details[name].Game.imageLink}
+                        src={details[name].Game.imageLink}
                         className="img-thumbnail"
                       />
                       <span className="text-white text-center fs-3 ">{details[name].Game.name}</span>

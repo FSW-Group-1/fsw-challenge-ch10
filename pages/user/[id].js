@@ -78,7 +78,7 @@ function DetailUser() {
                       height={150}
                       objectFit="fit"
                       quality={100}
-                      src={imagePath_ + data.Details[name].Game.imageLink}
+                      src={data.Details[name].Game.imageLink}
                       className="img-thumbnail"
                       alt='image'
                     />
