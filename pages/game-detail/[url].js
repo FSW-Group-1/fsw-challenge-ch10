@@ -55,7 +55,18 @@ const GameDetail = () => {
             data.imageLink = "dummy.png"
         }    
         imagePath_ = imagePath_ + data.imageLink
-        const gameLink = data.gameLink
+        
+        let gameLink = data.gameLink
+        let buttonLabel = ''
+        let buttonClass = ''
+        if(data.gameLink) {
+            buttonLabel = 'PLAY NOW'
+            buttonClass = "btn main-button btn-warning mt-3"
+        } else {
+            gameLink = '#'
+            buttonLabel = 'Coming Soon ...'
+            buttonClass = "btn main-button btn-secondary"
+        }
         return (
             <>
                 <h1 className="">{data.name}</h1>
@@ -78,13 +89,13 @@ const GameDetail = () => {
                         </Row>
                         <Row>
                             <Col>
-                                <a href={gameLink} className="btn main-button btn-warning mt-3" id='text-main-button'  style={
+                                <a href={ gameLink } className={buttonClass} id='text-main-button'  style={
                                     {
                                         whiteSpace: 'nowrap',
                                         fontWeight: 'bold'
                                     }
                                 }>
-                                    PLAY NOW  
+                                   { buttonLabel }  
                                 </a>
                             </Col>
                         </Row>
