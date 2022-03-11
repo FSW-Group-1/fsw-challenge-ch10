@@ -179,6 +179,7 @@ class Profile extends Component {
                       <Image
                         width={300}
                         height={150}
+                        alt='game'
                         objectFit="fit"
                         quality={100}
                         src={imagePath_ + details[name].Game.imageLink}
