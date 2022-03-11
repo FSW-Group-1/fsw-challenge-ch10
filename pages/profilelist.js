@@ -31,23 +31,22 @@ class ProfileList extends Component{
             <div>
                 <div className='row text-center'>
                 {Object.keys(data).map(function(name, index){
-                        return (
-                                <Card style={{ width: '18rem' }} key={index} className='m-3'>
-                                    <Card.Img variant="top" 
-                                    style={{width: '100%', height: '15vw', objectFit: 'contain'}}
-                                     src={data[name].imageLink}
-                                     className='rounded-3 img-thumbnail'
-                                     />
-                                     <Card.Title>{data[name].username}</Card.Title>
-                                    <Card.Body>
-                                    <ListGroup className="list-group-flush">
-                                        <ListGroupItem>Description: {data[name].description}</ListGroupItem>
-                                        <ListGroupItem>Point: {data[name].point}</ListGroupItem>
-                                    </ListGroup>
-                                    </Card.Body>
-                                </Card>
-                                
-                        )
+                    return (
+                        <Card style={{ width: '18rem' }} key={index} className='m-3'>
+                            <Card.Img variant="top" 
+                            style={{width: '100%', height: '15vw', objectFit: 'contain'}}
+                                src={data[name].imageLink}
+                                className='rounded-3 img-thumbnail'
+                                />
+                                <Card.Title>{data[name].username}</Card.Title>
+                            <Card.Body>
+                            <ListGroup className="list-group-flush">
+                                <ListGroupItem>Description: {data[name].description}</ListGroupItem>
+                                <ListGroupItem>Point: {data[name].point}</ListGroupItem>
+                            </ListGroup>
+                            </Card.Body>
+                        </Card>
+                    )
                 })}
                 </div>
             </div>
@@ -69,6 +68,7 @@ class ProfileList extends Component{
                 {Object.keys(data).map(function(name, index){
                         return (
                             <Card style={{ width: '18rem' }} key={index} className='m-3'>
+                                <a href={`profile/${data[name].id}`}>    
                                 <Card.Img variant="top" 
                                 style={{width: '100%', height: '15vw', objectFit: 'contain'}}
                                  src={data[name].imageLink}
@@ -81,6 +81,7 @@ class ProfileList extends Component{
                                     <ListGroupItem>Point: {data[name].point}</ListGroupItem>
                                 </ListGroup>
                                 </Card.Body>
+                                </a>
                             </Card>
                             
                     )
