@@ -5,14 +5,14 @@ import axios from 'axios';
 import { Container, Row, Col} from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import img from '../public/assets/game-card-img/rock-paper-scissor.jpg'
 import Layout  from './components/layout'
 import LoadingAnimation  from './components/loadingAnimation_1'
 import dummy from '../public/assets/game-card-img/dummy.png'
 class GameCard extends Component {
   render () {
     const { item } = this.props
-    
+    console.log(img)
     let imagePath_ = "/../public/assets/game-card-img/"
     if(!item.imageLink) {
         item.imageLink = "dummy.png"
@@ -96,7 +96,7 @@ export default class Home extends Component {
     const games = () => {
       return (
         <>
-        <img src="/assets/game-card-img/dummy.png" alt="Game"/>
+        <img src="/assets/game-card-img/rock-paper-scissor.jpg" alt="Game"/>
           <Row className='justify-content-center mt-3'>
             {gameList.map((item, index) => {
               return(
