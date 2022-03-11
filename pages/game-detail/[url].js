@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react"
 import { useRouter } from "next/router";
-import { Layout } from '../components/layout';
-import { LoadingAnimation } from '../components/loadingAnimation_1'
+import Layout  from '../components/layout';
+import LoadingAnimation from '../components/loadingAnimation_1'
 
 import { Container, Row, Col} from 'react-bootstrap'
 import Image from 'next/image'
@@ -74,7 +74,7 @@ const GameDetail = () => {
                     <Col md={5}>
                         <Image
                             alt="Game thumbnail"
-                            src={imagePath_}
+                            src={data.imageLink}
                             width={500}
                             height={250}
                             objectFit="fit"

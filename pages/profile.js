@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Card, Col, Row, Container, Form, Button, Modal } from 'react-bootstrap'
-import { Layout } from './components/layout'
+import Layout  from './components/layout'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Image from 'next/image'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import userAction from '../redux/action/userAction'
-import { LoadingAnimation } from './components/loadingAnimation_1'
 import privateAuth from '../Auth/privateAuth'
 
 class Profile extends Component {
@@ -182,7 +181,7 @@ class Profile extends Component {
                         alt='game'
                         objectFit="fit"
                         quality={100}
-                        src={imagePath_ + details[name].Game.imageLink}
+                        src={details[name].Game.imageLink}
                         className="img-thumbnail"
                       />
                       <span className="text-white text-center fs-3 ">{details[name].Game.name}</span>
