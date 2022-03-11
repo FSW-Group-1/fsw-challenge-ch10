@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from "../styles/Index.module.css"
+import axios from 'axios';
 
 import { Container, Row, Col} from 'react-bootstrap'
 import Image from 'next/image'
@@ -12,6 +13,9 @@ class GameCard extends Component {
     const { item } = this.props
     
     let imagePath_ = "/../public/assets/game-card-img/"
+    if(!item.imageLink) {
+        item.imageLink = "rock-paper-scissor.jpg"
+    }    
     imagePath_ = imagePath_ + item.imageLink
 
     return (
@@ -50,36 +54,51 @@ export default class Home extends Component {
 
   async getGameList () {
     try {
-      const list = [
-        {
-          description: "Permainan Batu Gunting Kertas",
-          imageLink: "rock-paper-scissor.jpg",
-          name: "Rock Papper Scissor",
-          route: "rps"
+      // const list = [
+      //   {
+      //     description: "Permainan Batu Gunting Kertas",
+      //     imageLink: "rock-paper-scissor.jpg",
+      //     name: "Rock Papper Scissor",
+      //     route: "rps"
+      //   },
+      //   {
+      //     description: "Permainan Ular Tangga",
+      //     imgaeLink: "ladder-and-snake.jpg",
+      //     name: "Ladder and Snake",
+      //     route: "lns"
+      //   },
+      //   {
+      //     description: "Permainan Congklak",
+      //     imageLink: "conglak.jpg",
+      //     name: "Congklak",
+      //     route: "congklak"
+      //   },
+      //   {
+      //     description: "Permaianan Karambol",
+      //     imageLink: "carambol.jpg",
+      //     name: "Karambol",
+      //     route: "karambol"
+      //   }
+      // ]
+
+      const config = {
+        headers: {
+            authorization: `${localStorage.getItem('accessToken')}`,
         },
-        {
-          description: "Permainan Ular Tangga",
-          imgaeLink: "ladder-and-snake.jpg",
-          name: "Ladder and Snake",
-          route: "lns"
-        },
-        {
-          description: "Permainan Congklak",
-          imageLink: "conglak.jpg",
-          name: "Congklak",
-          route: "congklak"
-        },
-        {
-          description: "Permaianan Karambol",
-          imageLink: "carambol.jpg",
-          name: "Karambol",
-          route: "karambol"
-        }
-      ]
-      this.setState({
-        gameList: list,
-        isLoading: false
-      })
+      }
+      axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/allgame`, config)
+        .then(res => {
+          this.setState({
+            gameList: res.data.data,
+            isLoading: false
+          })
+        })
+
+      // this.setState({
+      //   gameList: list,
+      //   isLoading: false
+      // })
+
     } catch (error) {
       console.log(error)
       this.setState({
