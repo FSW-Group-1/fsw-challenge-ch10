@@ -236,9 +236,9 @@ const RPS = (props) => {
         <ModalBody>Hasil : {finalResult}</ModalBody>
         <ModalFooter>
             <Link href='/'  className='link-light'>
-              <Button color="secondary">
+              <a className='btn btn=secondary'>
                 Selesai
-              </Button>{' '}
+              </a>
             </Link> 
           <Button color="primary" onClick={resetRound}>
             Lanjut Lagi
