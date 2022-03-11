@@ -14,7 +14,7 @@ class GameCard extends Component {
     
     let imagePath_ = "/../public/assets/game-card-img/"
     if(!item.imageLink) {
-        item.imageLink = "rock-paper-scissor.jpg"
+        item.imageLink = "dummy.png"
     }    
     imagePath_ = imagePath_ + item.imageLink
 
