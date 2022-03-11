@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 import Layout  from './components/layout'
 import LoadingAnimation  from './components/loadingAnimation_1'
-// import dummy from ''
+import dummy from '../public/assets/game-card-img/dummy.png'
 class GameCard extends Component {
   render () {
     const { item } = this.props
@@ -17,7 +17,7 @@ class GameCard extends Component {
     if(!item.imageLink) {
         item.imageLink = "dummy.png"
     }    
-    imagePath_ = imagePath_ + item.imageLink
+    imagePath_ = imagePath_ 
 
     const linkHref = '/game-detail/'+item.id 
 
@@ -34,10 +34,7 @@ class GameCard extends Component {
             />
 
         </Link>
-            <img
-              src={item.imageLink}
-              alt="Game"
-            />
+          
         <br />
         <span style={ { color: 'yellow', fontSize:'100%' } }>{item.name}</span>
         <br />
@@ -99,6 +96,7 @@ export default class Home extends Component {
     const games = () => {
       return (
         <>
+        <img src="/assets/game-card-img/dummy.png" alt="Game"/>
           <Row className='justify-content-center mt-3'>
             {gameList.map((item, index) => {
               return(
