@@ -52,7 +52,7 @@ class Navbars extends Component{
                         <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
                         <NavDropdown title="Others" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="profilelist">See other user</NavDropdown.Item>
+                            <NavDropdown.Item href="/profilelist">See other user</NavDropdown.Item>
                             <NavDropdown.Divider />
                         </NavDropdown>
                         </Nav>
