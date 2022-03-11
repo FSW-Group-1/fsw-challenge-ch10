@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react'
-import { Card, Col, Row, Container, Form, Button, Modal } from 'react-bootstrap'
+import { Card, Col, Row, Container, Form, Button, Modal, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'react-bootstrap'
 import { Layout } from '../components/layout'
 import { useRouter } from 'next/router'
 import style from '../../styles/Profile.module.css'
@@ -10,26 +10,42 @@ import axios from 'axios'
 function DetailUser() {
   const router = useRouter()
   const { id } = router.query
-  const [handleShow, setHandleShow] = useState(false)
-  const [handleSubmit, setHandleSubmit] = useState(false)
-  const [data, setData] = useState('')
+  const [data, setDataFetch] = useState()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     axios.get(`https://fsw-challenge-ch10-api-dev.herokuapp.com/api/user/${id}`).then((res) => {
-      console.log(res.data.data)
-      setData(res.data.data)
+      setDataFetch(res.data.data)
+      setLoading(false)
     })
   }, [])
 
+  if (loading || !data) return <div> Loading... </div>
+
+  function showImage() {
+    let imagePath_ = '/../public/assets/game-card-img/'
+    if (!data.imageLink) {
+      return <Image width={300} height={150} objectFit="fit" quality={100} src={imagePath_ + 'dummy.png'} className="img-thumbnail" />
+    } else {
+      return (
+        <Card.Img
+          variant="top"
+          style={{ width: '100%', height: '20vw', objectFit: 'contain' }}
+          src={data.imageLink}
+          alt="game"
+          className="rounded-3 img-thumbnail"
+        />
+      )
+    }
+  }
+
   return (
-    <div className="profile-user">
+    <div>
       <Layout title="Profile">
         <div className={style.container}>
-          <div className={style.card}>
-            <div className={style.upper}>
-              <Card.Img variant="top" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={data.imageLink} alt="game" />
-            </div>
-            <div className="mt-4 text-center">
+          <div className={`${style.card} text-center`}>
+            <div>{showImage()}</div>
+            <div className="mt-4">
               <h4 className="mb-0">{data.username}</h4>
               <button className={`btn btn-primary btn-sm mt-2 ${style.follow}`}>{data.email}</button>
               <p className="my-2">{data.description}</p>
@@ -46,6 +62,34 @@ function DetailUser() {
               </div>
             </div>
           </div>
+
+          {data != undefined ? (
+            <Row style={{ marginTop: '100px', textAlign: 'center' }}>
+              <h3>Game History</h3>
+              {Object.keys(data.Details).map(function (name, index) {
+                let imagePath_ = '/../public/assets/game-card-img/'
+                if (!data.Details[name].Game.imageLink) {
+                  data.Details[name].Game.imageLink = 'dummy.png'
+                }
+                return (
+                  <Card style={{ width: '18rem' }} key={index} className="m-3 bg-dark p-1">
+                    <Image
+                      width={300}
+                      height={150}
+                      objectFit="fit"
+                      quality={100}
+                      src={imagePath_ + data.Details[name].Game.imageLink}
+                      className="img-thumbnail"
+                    />
+                    <span className="text-white text-center fs-3 ">{data.Details[name].Game.name}</span>
+                    <span className="text-white text-center fs-6 fw-light ">Point: {data.Details[name].point}</span>
+                  </Card>
+                )
+              })}
+            </Row>
+          ) : (
+            <div>halo bro</div>
+          )}
         </div>
       </Layout>
     </div>

@@ -6,6 +6,8 @@ import Image from 'next/image'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import userAction from '../redux/action/userAction'
+import { LoadingAnimation } from './components/loadingAnimation_1'
+import privateAuth from '../Auth/privateAuth'
 
 class Profile extends Component {
   constructor(props) {
@@ -112,9 +114,14 @@ class Profile extends Component {
               <Row>
                 <Col sm={4}>
                   <button type="button" className="border-0" onClick={this.handleShow}>
-                    <img alt="Profile" className="img-thumbnail" src={this.state.image} />
+                    <Card.Img
+                      style={{ width: '18rem', height: '15vw', objectFit: 'contain' }}
+                      variant="top"
+                      className="img-thumbnail"
+                      src={this.state.image}
+                    />
                   </button>
-
+                  <br />
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>
                       <Card.Title>
@@ -157,17 +164,24 @@ class Profile extends Component {
               </Row>
             </form>
             <Row>
+              <h3>Games Played:</h3>
               {/* {details != undefined ? this.showDetails() : <div>Loading...</div>} */}
               {details != undefined ? (
                 Object.keys(details).map(function (name, index) {
                   console.log(details[name].point)
+                  let imagePath_ = '/../public/assets/game-card-img/'
+                  if (!details[name].Game.imageLink) {
+                    details[name].Game.imageLink = 'dummy.png'
+                  }
+                  console.log(imagePath_ + details[name].Game.imageLink)
                   return (
                     <Card style={{ width: '18rem' }} key={index} className="m-3 bg-dark p-1">
-                      <Card.Img
-                        variant="top"
-                        style={{ resize: 'cover', width: '100%' }}
-                        src={details[name].Game.imageLink}
-                        // alt='game'
+                      <Image
+                        width={300}
+                        height={150}
+                        objectFit="fit"
+                        quality={100}
+                        src={imagePath_ + details[name].Game.imageLink}
                         className="img-thumbnail"
                       />
                       <span className="text-white text-center fs-3 ">{details[name].Game.name}</span>
@@ -186,4 +200,4 @@ class Profile extends Component {
   }
 }
 
-export default connect((state) => state, userAction)(Profile)
+export default connect((state) => state, userAction)(privateAuth(Profile))

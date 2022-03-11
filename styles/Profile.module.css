@@ -5,8 +5,9 @@
 }
 
 .container {
-  height: 100vh;
+  margin-top: 80px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -17,8 +18,6 @@
   border-radius: 15px;
   padding: 8px;
   background-color: #fff;
-  position: relative;
-  height: 370px;
 }
 
 .upper {
