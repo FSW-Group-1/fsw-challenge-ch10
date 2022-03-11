@@ -13,7 +13,7 @@ import Paper from '../public/images/icon-paper.svg'
 import Rock from '../public/images/icon-rock.svg'
 import Scissors from '../public/images/icon-scissors.svg'
 import Refresh from '../public/images/refresh.png'
-import { Layout } from './components/layout'
+import Layout  from './components/layout'
 
 const RPS = (props) => {
   const [userChoice, setUserChoice] = useState(null)

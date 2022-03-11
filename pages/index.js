@@ -6,8 +6,8 @@ import { Container, Row, Col} from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Layout } from './components/layout'
-import { LoadingAnimation } from './components/loadingAnimation_1'
+import Layout  from './components/layout'
+import LoadingAnimation  from './components/loadingAnimation_1'
 
 class GameCard extends Component {
   render () {

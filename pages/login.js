@@ -5,8 +5,8 @@ import userAction from "../redux/action/userAction";
 import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 
 import Router from 'next/router';
-import { Layout } from './components/layout'
-import { LoadingAnimation } from './components/loadingAnimation_1'
+import Layout  from './components/layout'
+import LoadingAnimation  from './components/loadingAnimation_1'
 
 class Login extends Component{
   

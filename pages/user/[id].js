@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react'
 import { Card, Col, Row, Container, Form, Button, Modal, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'react-bootstrap'
-import { Layout } from '../components/layout'
+import Layout from '../components/layout'
 import { useRouter } from 'next/router'
 import style from '../../styles/Profile.module.css'
 import Image from 'next/image'

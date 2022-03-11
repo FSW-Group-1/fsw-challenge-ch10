@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { Layout} from './components/layout'
+import Layout from './components/layout'
 
 import axios from 'axios';
 class ProfileList extends Component{

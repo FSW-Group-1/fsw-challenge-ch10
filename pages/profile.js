@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Card, Col, Row, Container, Form, Button, Modal } from 'react-bootstrap'
-import { Layout } from './components/layout'
+import Layout  from './components/layout'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Image from 'next/image'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import userAction from '../redux/action/userAction'
-import { LoadingAnimation } from './components/loadingAnimation_1'
 import privateAuth from '../Auth/privateAuth'
 
 class Profile extends Component {
