@@ -11,6 +11,8 @@ import styles from '../../styles/GameDetail.module.css'
 
 import axios from 'axios'
 
+
+
 const GameDetail = () => {
     const router = useRouter()
     const { url } = router.query
