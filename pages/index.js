@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { Container, Row, Col} from 'react-bootstrap'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Layout } from './components/layout'
 import { LoadingAnimation } from './components/loadingAnimation_1'
@@ -18,9 +19,11 @@ class GameCard extends Component {
     }    
     imagePath_ = imagePath_ + item.imageLink
 
+    const linkHref = '/game-detail/'+item.id 
+
     return (
       <>
-        <button className='text-center p-0 border-0'>
+        <Link href={linkHref} className='text-center p-0 border-0'>
             <Image
               alt="Game thumbnail"
               src={imagePath_}
@@ -29,7 +32,7 @@ class GameCard extends Component {
               objectFit="fit"
               quality={100}
             />
-        </button>
+        </Link>
         <br />
         <span style={ { color: 'yellow', fontSize:'100%' } }>{item.name}</span>
         <br />

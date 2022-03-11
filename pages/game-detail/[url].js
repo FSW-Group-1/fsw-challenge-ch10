@@ -1,54 +1,24 @@
-import { useRouter } from "next/router";
-
 import React, { Component } from "react"
+import { useRouter } from "next/router";
+import { Layout } from '../components/layout';
+import { LoadingAnimation } from '../components/loadingAnimation_1'
 
-import LoadingAnimation from '../components/loadingAnimation_1'
+import { Container, Row, Col} from 'react-bootstrap'
+import Image from 'next/image'
+import Link from 'next/link'
 
-export default class GameDetail extends Component {
-    constructor (props) {
-        super(props)
-        this.state = {
-            name: null,
-            imageLink: null,
-            gameLink: null,
-            description: null,
-            isLoading: true
-        }
-    }
 
-    componentDidMount () {
-        const router = useRouter()
-        const { url } = router.query
-        this.setState({
-            name: url,
-            isLoading: false
-        })
-    }
+const GameDetail = () => {
+    const router = useRouter()
+    const { url } = router.query
 
-    get LoadingContent () {
-        return(
-          <>
-            <br />
-            <br />
-            <br />
-            <LoadingAnimation />
-          </>
-        )
-    }
-
-    get Content () {
-        return(
-            <>
-                <h1>Content</h1>
-            </>
-        )
-    }
-
-    render () {
-        return(
-            <>
-                {this.state.isLoading ? this.LoadingContent : this.Content}
-            </>
-        )
-    }
+    return(
+        <>
+            <Layout>
+                <p>Post: {url} </p>
+            </Layout>
+        </>
+    )
 }
+
+export default GameDetail
