@@ -7,7 +7,7 @@ import { Row, Col } from 'reactstrap'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import Image from 'next/image'
 import Router from 'next/router'
-
+import Link from 'next/link'
 //icon
 import Paper from '../public/images/icon-paper.svg'
 import Rock from '../public/images/icon-rock.svg'
@@ -235,9 +235,13 @@ const RPS = (props) => {
         <ModalHeader toggle={toggle}>Hasil Permainan</ModalHeader>
         <ModalBody>Hasil : {finalResult}</ModalBody>
         <ModalFooter>
-          <Button color="secondary">
-            <a href='/'  className='link-light'>Selesai</a> 
-          </Button>{' '}
+              {/* <button className='btn btn-secondary link-light text-white'> */}
+                <Link href='/'>
+                  <button className='btn btn-secondary text-white'>
+                    Selesai
+                  </button>
+                </Link>
+              {/* </button> */}
           <Button color="primary" onClick={resetRound}>
             Lanjut Lagi
           </Button>

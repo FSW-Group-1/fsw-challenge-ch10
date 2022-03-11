@@ -77,7 +77,7 @@ class Login extends Component{
               type="password"
             />
             </FormGroup>
-          <a href='/forgot-password'>Forgot your password? Click me!</a><br/>
+          {/* <a href='/forgot-password'>Forgot your password? Click me!</a><br/> */}
           <Button className='btn-success'>
             { this.props.auth.isLoading == true ? <LoadingAnimation /> :  <span>Login!</span>}
           </Button>
