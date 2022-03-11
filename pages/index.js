@@ -8,12 +8,12 @@ import Link from 'next/link'
 
 import Layout  from './components/layout'
 import LoadingAnimation  from './components/loadingAnimation_1'
-
+// import dummy from ''
 class GameCard extends Component {
   render () {
     const { item } = this.props
     
-    let imagePath_ = "../public/assets/game-card-img/"
+    let imagePath_ = "/../public/assets/game-card-img/"
     if(!item.imageLink) {
         item.imageLink = "dummy.png"
     }    
@@ -26,13 +26,18 @@ class GameCard extends Component {
         <Link href={linkHref} className='text-center p-0 border-0'>
             <Image
               alt="Game thumbnail"
-              src={imagePath_}
+              src={item.imageLink}
               width={300}
               height={150}
               objectFit="fit"
               quality={100}
             />
+
         </Link>
+            <img
+              src={item.imageLink}
+              alt="Game"
+            />
         <br />
         <span style={ { color: 'yellow', fontSize:'100%' } }>{item.name}</span>
         <br />
