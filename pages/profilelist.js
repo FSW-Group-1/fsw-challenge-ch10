@@ -68,7 +68,7 @@ class ProfileList extends Component{
                 {Object.keys(data).map(function(name, index){
                         return (
                             <Card style={{ width: '18rem' }} key={index} className='m-3'>
-                                <a href={`profile/${data[name].id}`}>    
+                                <a href={`user/${data[name].id}`}>    
                                 <Card.Img variant="top" 
                                 style={{width: '100%', height: '15vw', objectFit: 'contain'}}
                                  src={data[name].imageLink}

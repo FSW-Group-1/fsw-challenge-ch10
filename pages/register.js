@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { Layout } from './components/layout'
 import userAction from "../redux/action/userAction";
 import Router from 'next/router';
+import { LoadingAnimation } from './components/loadingAnimation_1'
 
 
 class Register extends Component{
@@ -127,7 +128,7 @@ class Register extends Component{
             </FormGroup>
             {' '}
             <Button className='btn-success'>
-            { this.props.auth.isLoading == true ? <span>Loading....</span> :  <span>Register!</span>}
+            { this.props.auth.isLoading == true ? <LoadingAnimation /> :  <span>Register!</span>}
             </Button>
           </Form>
           </Container>
