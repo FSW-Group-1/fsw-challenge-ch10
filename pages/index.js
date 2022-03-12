@@ -12,7 +12,7 @@ import dummy from '../public/assets/game-card-img/dummy.png'
 class GameCard extends Component {
   render () {
     const { item } = this.props
-    console.log(img)
+    // console.log(img)
     let imagePath_ = "/../public/assets/game-card-img/"
     if(!item.imageLink) {
         item.imageLink = "dummy.png"
